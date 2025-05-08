@@ -1,0 +1,187 @@
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('Grilled Salmon Recipe Page Loaded');
+    
+    // Initialize the recipe functionality
+    initializeRecipe();
+  });
+  
+  function initializeRecipe() {
+    // Make ingredients checkable
+    initializeIngredientChecklist();
+   
+    // Initialize cooking timer
+    initializeCookingTimer();
+    
+    // Initialize serving size calculator
+    initializeServingCalculator();
+  }
+  
+  function initializeIngredientChecklist() {
+    const ingredientItems = document.querySelectorAll('.ingredients-list li');
+    
+    ingredientItems.forEach(item => {
+      item.addEventListener('click', function() {
+        this.classList.toggle('ingredient-checked');
+      });
+    });
+  }
+  
+  
+  function initializeCookingTimer() {
+    const timerDisplay = document.getElementById('timer-display');
+    const startButton = document.getElementById('start-timer');
+    const resetButton = document.getElementById('reset-timer');
+    const timerContainer = document.getElementById('cooking-timer');
+    
+    if (!timerDisplay || !startButton || !resetButton) return;
+    
+    let countdown;
+    let timeLeft = 12 * 60; // 12 minutes in seconds
+    let timerRunning = false;
+    
+    function updateTimerDisplay() {
+      const minutes = Math.floor(timeLeft / 60);
+      const seconds = timeLeft % 60;
+      timerDisplay.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+    }
+    
+    startButton.addEventListener('click', function() {
+      if (timerRunning) {
+        // Pause timer
+        clearInterval(countdown);
+        startButton.textContent = 'Resume';
+        timerContainer.classList.remove('timer-active');
+      } else {
+        // Start/resume timer
+        countdown = setInterval(function() {
+          timeLeft--;
+          updateTimerDisplay();
+          
+          if (timeLeft <= 0) {
+            clearInterval(countdown);
+            timerRunning = false;
+            startButton.textContent = 'Start';
+            timerContainer.classList.remove('timer-active');
+            
+            // Alert when timer finishes
+            alert('Your salmon should be done now!');
+          }
+        }, 1000);
+        
+        startButton.textContent = 'Pause';
+        timerContainer.classList.add('timer-active');
+      }
+      
+      timerRunning = !timerRunning;
+    });
+    
+    resetButton.addEventListener('click', function() {
+      clearInterval(countdown);
+      timeLeft = 12 * 60;
+      updateTimerDisplay();
+      timerRunning = false;
+      startButton.textContent = 'Start';
+      timerContainer.classList.remove('timer-active');
+    });
+    
+    // Initialize timer display
+    updateTimerDisplay();
+  }
+  
+  function initializeServingCalculator() {
+    const servingSelect = document.getElementById('serving-size');
+    const ingredientAmounts = document.querySelectorAll('.ingredient-amount');
+    
+    if (!servingSelect || ingredientAmounts.length === 0) return;
+    
+    // Store original values
+    const originalAmounts = [];
+    ingredientAmounts.forEach(item => {
+      originalAmounts.push(parseFloat(item.textContent));
+    });
+    
+    servingSelect.addEventListener('change', function() {
+      const servingMultiplier = parseInt(this.value) / 4; // Default recipe is for 4
+      
+      ingredientAmounts.forEach((item, index) => {
+        let newAmount = originalAmounts[index] * servingMultiplier;
+        
+        // Round to 1 decimal place
+        newAmount = Math.round(newAmount * 10) / 10;
+        
+        // If it's a whole number, remove the decimal
+        if (newAmount === Math.floor(newAmount)) {
+          newAmount = Math.floor(newAmount);
+        }
+        
+        item.textContent = newAmount;
+      });
+      
+      // Update cooking time indication
+      const cookTimeElement = document.getElementById('cook-time-value');
+      if (cookTimeElement) {
+        let newCookTime = 12; // Default cook time in minutes
+        
+        // Slightly increase cooking time for larger portions
+        if (servingMultiplier > 1) {
+          newCookTime = Math.round(12 * (1 + (servingMultiplier - 1) * 0.25));
+        }
+        
+        cookTimeElement.textContent = newCookTime;
+        
+        // Update timer if it exists
+        const timerDisplay = document.getElementById('timer-display');
+        const resetButton = document.getElementById('reset-timer');
+        if (timerDisplay && resetButton) {
+          // Simulate clicking reset
+          resetButton.click();
+          
+          // Set new time
+          timeLeft = newCookTime * 60;
+          const minutes = Math.floor(timeLeft / 60);
+          const seconds = timeLeft % 60;
+          timerDisplay.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+        }
+      }
+    });
+  }
+  
+  // Function to show/hide nutrition information
+  function toggleNutrition() {
+    const nutritionSection = document.getElementById('nutrition-section');
+    if (nutritionSection) {
+      nutritionSection.classList.toggle('nutrition-hidden');
+      
+      const toggleButton = document.getElementById('toggle-nutrition');
+      if (toggleButton) {
+        toggleButton.textContent = nutritionSection.classList.contains('nutrition-hidden') ? 
+          'Show Nutrition Information' : 'Hide Nutrition Information';
+      }
+    }
+  }
+  
+  // Function to toggle between Fahrenheit and Celsius
+  function toggleTemperature() {
+    const tempElements = document.querySelectorAll('.temperature');
+    tempElements.forEach(el => {
+      if (el.dataset.unit === 'F') {
+        // Convert F to C
+        const fTemp = parseInt(el.dataset.temp);
+        const cTemp = Math.round((fTemp - 32) * 5/9);
+        el.textContent = `${cTemp}°C`;
+        el.dataset.unit = 'C';
+      } else {
+        // Convert C to F
+        const cTemp = parseInt(el.dataset.temp);
+        const fTemp = Math.round((cTemp * 9/5) + 32);
+        el.textContent = `${fTemp}°F`;
+        el.dataset.unit = 'F';
+      }
+    });
+    
+    const toggleButton = document.getElementById('toggle-temp');
+    if (toggleButton) {
+      toggleButton.textContent = toggleButton.textContent.includes('Celsius') ? 
+        'Show Fahrenheit' : 'Show Celsius';
+    }
+  }
