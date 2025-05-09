@@ -35,14 +35,16 @@ document.addEventListener('DOMContentLoaded', function() {
     
     if (!timerDisplay || !startButton || !resetButton) return;
     
-    let countdown;
+    let countdown: NodeJS.Timeout | undefined;
     let timeLeft = 12 * 60; // 12 minutes in seconds
     let timerRunning = false;
     
     function updateTimerDisplay() {
       const minutes = Math.floor(timeLeft / 60);
       const seconds = timeLeft % 60;
-      timerDisplay.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+      if (timerDisplay) {
+        timerDisplay.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+      }
     }
     
     startButton.addEventListener('click', function() {
@@ -50,7 +52,11 @@ document.addEventListener('DOMContentLoaded', function() {
         // Pause timer
         clearInterval(countdown);
         startButton.textContent = 'Resume';
-        timerContainer.classList.remove('timer-active');
+        if (timerContainer) {
+          if (timerContainer) {
+            timerContainer?.classList.remove('timer-active');
+          }
+        }
       } else {
         // Start/resume timer
         countdown = setInterval(function() {
@@ -61,7 +67,9 @@ document.addEventListener('DOMContentLoaded', function() {
             clearInterval(countdown);
             timerRunning = false;
             startButton.textContent = 'Start';
-            timerContainer.classList.remove('timer-active');
+            if (timerContainer) {
+              timerContainer.classList.remove('timer-active');
+            }
             
             // Alert when timer finishes
             alert('Your salmon should be done now!');
@@ -69,7 +77,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 1000);
         
         startButton.textContent = 'Pause';
-        timerContainer.classList.add('timer-active');
+        timerContainer?.classList.add('timer-active');
       }
       
       timerRunning = !timerRunning;
@@ -81,7 +89,9 @@ document.addEventListener('DOMContentLoaded', function() {
       updateTimerDisplay();
       timerRunning = false;
       startButton.textContent = 'Start';
-      timerContainer.classList.remove('timer-active');
+      if (timerContainer) {
+        timerContainer.classList.remove('timer-active');
+      }
     });
     
     // Initialize timer display
@@ -95,13 +105,13 @@ document.addEventListener('DOMContentLoaded', function() {
     if (!servingSelect || ingredientAmounts.length === 0) return;
     
     // Store original values
-    const originalAmounts = [];
+    const originalAmounts: number[] = [];
     ingredientAmounts.forEach(item => {
-      originalAmounts.push(parseFloat(item.textContent));
+      originalAmounts.push(parseFloat(item.textContent || '0'));
     });
     
     servingSelect.addEventListener('change', function() {
-      const servingMultiplier = parseInt(this.value) / 4; // Default recipe is for 4
+      const servingMultiplier = parseInt((this as HTMLSelectElement).value) / 4; // Default recipe is for 4
       
       ingredientAmounts.forEach((item, index) => {
         let newAmount = originalAmounts[index] * servingMultiplier;
@@ -114,7 +124,7 @@ document.addEventListener('DOMContentLoaded', function() {
           newAmount = Math.floor(newAmount);
         }
         
-        item.textContent = newAmount;
+        item.textContent = newAmount.toString();
       });
       
       // Update cooking time indication
@@ -127,7 +137,7 @@ document.addEventListener('DOMContentLoaded', function() {
           newCookTime = Math.round(12 * (1 + (servingMultiplier - 1) * 0.25));
         }
         
-        cookTimeElement.textContent = newCookTime;
+        cookTimeElement.textContent = newCookTime.toString();
         
         // Update timer if it exists
         const timerDisplay = document.getElementById('timer-display');
@@ -137,7 +147,7 @@ document.addEventListener('DOMContentLoaded', function() {
           resetButton.click();
           
           // Set new time
-          timeLeft = newCookTime * 60;
+          let timeLeft = newCookTime * 60;
           const minutes = Math.floor(timeLeft / 60);
           const seconds = timeLeft % 60;
           timerDisplay.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
@@ -164,23 +174,23 @@ document.addEventListener('DOMContentLoaded', function() {
   function toggleTemperature() {
     const tempElements = document.querySelectorAll('.temperature');
     tempElements.forEach(el => {
-      if (el.dataset.unit === 'F') {
+      if ((el as HTMLElement).dataset.unit === 'F') {
         // Convert F to C
-        const fTemp = parseInt(el.dataset.temp);
+        const fTemp = parseInt((el as HTMLElement).dataset.temp || '0');
         const cTemp = Math.round((fTemp - 32) * 5/9);
         el.textContent = `${cTemp}°C`;
-        el.dataset.unit = 'C';
+        (el as HTMLElement).dataset.unit = 'C';
       } else {
         // Convert C to F
-        const cTemp = parseInt(el.dataset.temp);
+        const cTemp = parseInt((el as HTMLElement).dataset.temp || '0');
         const fTemp = Math.round((cTemp * 9/5) + 32);
         el.textContent = `${fTemp}°F`;
-        el.dataset.unit = 'F';
+        (el as HTMLElement).dataset.unit = 'F';
       }
     });
     
     const toggleButton = document.getElementById('toggle-temp');
-    if (toggleButton) {
+    if (toggleButton && toggleButton.textContent) {
       toggleButton.textContent = toggleButton.textContent.includes('Celsius') ? 
         'Show Fahrenheit' : 'Show Celsius';
     }
