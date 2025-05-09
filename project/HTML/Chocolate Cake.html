@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Classic Chocolate Cake Recipe</title>
+  <link rel="stylesheet" href="../CSS/styles2.css">
+</head>
+<body>
+  <div class="recipe-header">
+    <h1>Classic Chocolate Cake</h1>
+    <div class="recipe-intro">
+      <p>This classic chocolate cake is rich, moist, and intensely chocolaty. It’s perfect for birthdays, celebrations, or simply to satisfy your sweet cravings. Paired with a creamy chocolate frosting, it's a crowd-pleaser every time.</p>
+    </div>
+  </div>
+
+  <img src="../image/Chocolate_Cake.jpg" alt="Layered chocolate cake with frosting and sprinkles" class="recipe-image">
+
+  <div class="recipe-meta">
+    <div>
+      <strong>Prep Time</strong>
+      20 minutes
+    </div>
+    <div>
+      <strong>Cook Time</strong>
+      <span id="cook-time-value">35</span> minutes
+    </div>
+    <div>
+      <strong>Total Time</strong>
+      55 minutes
+    </div>
+    <div>
+      <strong>Servings</strong>
+      <select id="serving-size">
+        <option value="8">8 servings</option>
+        <option value="10" selected>10 servings</option>
+        <option value="12">12 servings</option>
+        <option value="14">14 servings</option>
+      </select>
+    </div>
+  </div>
+
+  <div id="cooking-timer">
+    <h3>Cooking Timer</h3>
+    <div id="timer-display">35:00</div>
+    <div class="timer-controls">
+      <button id="start-timer" class="timer-button">Start</button>
+      <button id="reset-timer" class="timer-button">Reset</button>
+    </div>
+  </div>
+
+  <h2>Ingredients</h2>
+  <ul class="ingredients-list">
+    <li><span class="ingredient-amount">1 and 3/4</span> cups all-purpose flour</li>
+    <li><span class="ingredient-amount">3/4</span> cup unsweetened cocoa powder</li>
+    <li><span class="ingredient-amount">2</span> cups granulated sugar</li>
+    <li><span class="ingredient-amount">1 and 1/2</span> teaspoons baking powder</li>
+    <li><span class="ingredient-amount">1 and 1/2</span> teaspoons baking soda</li>
+    <li><span class="ingredient-amount">1</span> teaspoon salt</li>
+    <li><span class="ingredient-amount">2</span> eggs</li>
+    <li><span class="ingredient-amount">1</span> cup whole milk</li>
+    <li><span class="ingredient-amount">1/2</span> cup vegetable oil</li>
+    <li><span class="ingredient-amount">2</span> teaspoons vanilla extract</li>
+    <li><span class="ingredient-amount">1</span> cup boiling water</li>
+    <li>Chocolate frosting (homemade or store-bought)</li>
+  </ul>
+
+  <h2>Instructions</h2>
+  <ol>
+    <li>Preheat oven to <span class="temperature" data-temp="350" data-unit="F">350°F</span>. Grease and flour two 9-inch round cake pans or line with parchment paper.</li>
+    <li>In a large bowl, whisk together flour, cocoa powder, sugar, baking powder, baking soda, and salt.</li>
+    <li>Add eggs, milk, oil, and vanilla. Beat on medium speed for 2 minutes.</li>
+    <li>Carefully stir in boiling water (batter will be thin).</li>
+    <li>Divide batter evenly between the prepared pans.</li>
+    <li>Bake for 30–35 minutes, or until a toothpick inserted into the center comes out clean.</li>
+    <li>Let cakes cool in pans for 10 minutes, then remove and cool completely on a wire rack.</li>
+    <li>Frost with chocolate frosting and decorate as desired.</li>
+  </ol>
+
+  <button id="toggle-temp" class="timer-button" onclick="toggleTemperature()">Show Celsius</button>
+
+  <div class="tips">
+    <h2>Chef's Tips</h2>
+    <ul>
+      <li>Use room temperature ingredients for a smoother batter.</li>
+      <li>Don’t skip the boiling water—it enhances the chocolate flavor and creates moisture.</li>
+      <li>Freeze cake layers for 30 minutes before frosting to reduce crumbs.</li>
+      <li>Add a layer of raspberry jam or peanut butter between cake layers for a fun twist.</li>
+    </ul>
+  </div>
+
+  <h2>Serving Suggestions</h2>
+  <p>This chocolate cake pairs perfectly with:</p>
+  <ul>
+    <li>Fresh berries or fruit compote</li>
+    <li>Vanilla bean ice cream</li>
+    <li>Espresso or strong coffee</li>
+    <li>Whipped cream or chocolate ganache</li>
+  </ul>
+
+  <script src="../javascript/script2.js"></script>
+</body>
+</html>
