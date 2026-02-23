@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Classic Chocolate Cake — Al-Tabikh</title>
+  <link rel="stylesheet" href="../CSS/styles2.css">
+</head>
+<body data-recipe="chocolate-cake">
+  <nav class="recipe-nav">
+    <a href="home.html" class="back-btn">← Back to Recipes</a>
+    <span class="recipe-nav-title">Classic Chocolate Cake</span>
+    <div class="nav-actions-right">
+      <button class="save-recipe-btn" data-id="chocolate-cake">🤍 Save</button>
+      <button class="dark-toggle" aria-label="Toggle dark mode"></button>
+    </div>
+  </nav>
+  <div class="recipe-wrapper">
+    <div class="recipe-header">
+      <span class="recipe-category">🍰 Dessert</span>
+      <h1>Classic Chocolate Cake</h1>
+      <div class="recipe-intro-text">Rich, moist, and intensely chocolaty. Paired with creamy chocolate frosting — the crowd-pleasing celebration cake for any sweet occasion.</div>
+    </div>
+    <img src="../image/Chocolate Cake.jpg" alt="Classic Chocolate Cake" class="recipe-hero-img"
+      onerror="this.src='https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=800&q=80'">
+    <div class="recipe-meta">
+      <div><strong>Prep Time</strong><span class="value">20 min</span></div>
+      <div><strong>Cook Time</strong><span class="value" id="cook-time-value">35</span></div>
+      <div><strong>Total Time</strong><span class="value">55 min</span></div>
+      <div>
+        <strong>Servings</strong>
+        <select id="serving-size" class="serving-select">
+          <option value="8">8 servings</option><option value="10" selected>10 servings</option><option value="12">12 servings</option><option value="14">14 servings</option>
+        </select>
+      </div>
+    </div>
+    <div class="cooking-timer">
+      <h3>⏱ Cooking Timer</h3>
+      <div class="timer-display" id="timer-display">--:--</div>
+      <div class="timer-controls">
+        <button id="start-timer" class="timer-btn timer-btn-start">Start</button>
+        <button id="reset-timer" class="timer-btn timer-btn-reset">Reset</button>
+      </div>
+    </div>
+    <div class="recipe-section">
+      <h2 class="recipe-section-title">Ingredients</h2>
+      <ul class="ingredients-list"><li><div class="ingredient-check">✓</div><span>1¾ cups all-purpose flour</span></li><li><div class="ingredient-check">✓</div><span>¾ cup unsweetened cocoa powder</span></li><li><div class="ingredient-check">✓</div><span>2 cups granulated sugar</span></li><li><div class="ingredient-check">✓</div><span>1½ tsp baking powder</span></li><li><div class="ingredient-check">✓</div><span>1½ tsp baking soda</span></li><li><div class="ingredient-check">✓</div><span>1 tsp salt</span></li><li><div class="ingredient-check">✓</div><span>2 eggs</span></li><li><div class="ingredient-check">✓</div><span>1 cup whole milk</span></li><li><div class="ingredient-check">✓</div><span>½ cup vegetable oil</span></li><li><div class="ingredient-check">✓</div><span>2 tsp vanilla extract</span></li><li><div class="ingredient-check">✓</div><span>1 cup boiling water</span></li><li><div class="ingredient-check">✓</div><span>Chocolate frosting</span></li></ul>
+    </div>
+    <div class="recipe-section">
+      <h2 class="recipe-section-title">Instructions</h2>
+      <ol class="instructions-list"><li><div class="step-num">1</div><span>Preheat oven to 350°F (175°C). Grease and line two 9-inch round pans.</span></li><li><div class="step-num">2</div><span>Whisk together flour, cocoa, sugar, baking powder, baking soda, and salt.</span></li><li><div class="step-num">3</div><span>Add eggs, milk, oil, and vanilla. Beat 2 minutes until smooth.</span></li><li><div class="step-num">4</div><span>Stir in boiling water — batter will be thin, this is normal.</span></li><li><div class="step-num">5</div><span>Divide evenly between pans. Bake 30–35 minutes until a toothpick comes out clean.</span></li><li><div class="step-num">6</div><span>Cool completely on a wire rack, then frost and decorate.</span></li></ol>
+    </div>
+    <div class="recipe-section">
+      <h2 class="recipe-section-title">Chef's Tips</h2>
+      <div class="tips-box"><ul><li>Use room temperature ingredients for smoother batter.</li><li>Don't skip boiling water — it intensifies the chocolate flavour.</li><li>Freeze layers 30 minutes before frosting to reduce crumbs.</li><li>Add raspberry jam between layers for a twist.</li></ul></div>
+    </div>
+    <div class="recipe-section">
+      <h2 class="recipe-section-title">Serving Suggestions</h2>
+      <ul class="serving-list"><li>Fresh berries or fruit compote</li><li>Vanilla bean ice cream</li><li>Espresso or strong coffee</li><li>Whipped cream or chocolate ganache</li></ul>
+    </div>
+    <div class="recipe-section reviews-section">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:12px;">
+        <h2 class="recipe-section-title" style="margin-bottom:0;border-bottom:none;padding-bottom:0;">Reviews</h2>
+        <button class="write-review-btn">✏️ Write a Review</button>
+      </div>
+      <div class="reviews-summary">
+        <div>
+          <div class="avg-rating-big">—</div>
+          <div class="avg-stars">☆☆☆☆☆</div>
+          <div class="avg-count">No reviews yet</div>
+        </div>
+        <div class="rating-bars">
+          <div class="rating-bar-row"><span>5</span><div class="bar-track"><div class="bar-fill" id="bar-5" style="width:0%"></div></div></div>
+          <div class="rating-bar-row"><span>4</span><div class="bar-track"><div class="bar-fill" id="bar-4" style="width:0%"></div></div></div>
+          <div class="rating-bar-row"><span>3</span><div class="bar-track"><div class="bar-fill" id="bar-3" style="width:0%"></div></div></div>
+          <div class="rating-bar-row"><span>2</span><div class="bar-track"><div class="bar-fill" id="bar-2" style="width:0%"></div></div></div>
+          <div class="rating-bar-row"><span>1</span><div class="bar-track"><div class="bar-fill" id="bar-1" style="width:0%"></div></div></div>
+        </div>
+      </div>
+      <div class="review-form">
+        <h4>Share Your Experience</h4>
+        <div class="star-picker">
+          <span class="star-pick">⭐</span><span class="star-pick">⭐</span>
+          <span class="star-pick">⭐</span><span class="star-pick">⭐</span><span class="star-pick">⭐</span>
+        </div>
+        <div class="form-row">
+          <input type="text" id="reviewer-name" placeholder="Your name *">
+          <input type="email" placeholder="Email (optional)">
+        </div>
+        <textarea id="review-text" placeholder="Tell us what you thought of this recipe…"></textarea>
+        <button class="submit-review-btn">Submit Review</button>
+      </div>
+      <div class="reviews-list"></div>
+    </div>
+  </div>
+  <div id="toast" class="toast"></div>
+  <script src="../javascript/script2.js"></script>
+</body>
+</html>

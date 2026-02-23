@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Al-Tabikh — A Community Kitchen</title>
+  <link rel="stylesheet" href="../CSS/styles.css">
+</head>
+<body>
+
+  <!-- ── NAVBAR ─────────────────────────────────────────────── -->
+  <header class="header">
+    <nav class="navbar">
+      <div class="logo"><h1>Al-<span>Tabikh</span></h1></div>
+      <ul class="nav-links">
+        <li><a href="#home" class="active">Home</a></li>
+        <li><a href="#menu">Recipes</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="upload.html" class="btn btn-sm">+ Share Recipe</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button class="dark-toggle" aria-label="Toggle dark mode"></button>
+        <button class="burger" aria-label="Open menu"><span></span><span></span><span></span></button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- ── HERO ──────────────────────────────────────────────── -->
+  <section id="home" class="hero">
+    <div class="hero-glow"></div><div class="hero-glow2"></div>
+    <div class="hero-text">
+      <div class="hero-badge animate-down">🔥 Community Kitchen</div>
+      <h1 class="animate-down delay-1">Cook with <em>Passion,</em><br>Share with Joy</h1>
+      <p class="hero-desc animate-up delay-1">Discover hand-crafted recipes from our community of home chefs. From weeknight dinners to showstopping desserts — Al-Tabikh has it all.</p>
+      <div class="hero-buttons animate-up delay-2">
+        <a href="#menu" class="btn">Browse Recipes</a>
+        <a href="upload.html" class="btn btn-outline">Share Your Recipe</a>
+      </div>
+      <div class="hero-stats animate-up delay-3">
+        <div class="stat"><span class="stat-num" id="stat-count">19+</span><span class="stat-label">Recipes</span></div>
+        <div class="stat"><span class="stat-num">5★</span><span class="stat-label">Rated</span></div>
+        <div class="stat"><span class="stat-num">Free</span><span class="stat-label">Always</span></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-collage">
+        <div class="hero-collage-item">
+          <img src="../image/Grilled Salmon.jpg" alt="Grilled Salmon"
+            onerror="this.src='https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=600&q=80'">
+          <div class="hero-collage-label">Grilled Salmon</div>
+        </div>
+        <div class="hero-collage-item">
+          <img src="../image/Butter Chicken.jpg" alt="Butter Chicken"
+            onerror="this.src='https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?w=400&q=80'">
+          <div class="hero-collage-label">Butter Chicken</div>
+        </div>
+        <div class="hero-collage-item">
+          <img src="../image/Chocolate Cake.jpg" alt="Chocolate Cake"
+            onerror="this.src='https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=400&q=80'">
+          <div class="hero-collage-label">Chocolate Cake</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SEARCH ─────────────────────────────────────────────── -->
+  <div class="search-section">
+    <div class="container">
+      <div class="search-bar-inner">
+        <div class="search-field">
+          <span>🔍</span>
+          <input id="search-input" type="text" placeholder="Search recipes, ingredients, cuisines…">
+        </div>
+        <select id="cat-filter" class="filter-select">
+          <option value="all">All Categories</option>
+          <option value="seafood">Seafood</option>
+          <option value="chicken">Chicken</option>
+          <option value="pasta">Pasta</option>
+          <option value="dessert">Dessert</option>
+          <option value="vegan">Vegan</option>
+          <option value="drinks">Drinks</option>
+        </select>
+        <select id="time-filter" class="filter-select">
+          <option value="all">Any Time</option>
+          <option value="30">Under 30 min</option>
+          <option value="60">Under 60 min</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── CATEGORIES ─────────────────────────────────────────── -->
+  <section class="categories-section">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-tag">Browse By</span>
+        <h2 class="section-title">What Are You <em>Craving?</em></h2>
+      </div>
+      <div class="categories-grid reveal">
+        <button class="cat-chip active" data-cat="all"><span class="icon">🍽️</span> All</button>
+        <button class="cat-chip" data-cat="seafood"><span class="icon">🐟</span> Seafood</button>
+        <button class="cat-chip" data-cat="chicken"><span class="icon">🍗</span> Chicken</button>
+        <button class="cat-chip" data-cat="pasta"><span class="icon">🍝</span> Pasta</button>
+        <button class="cat-chip" data-cat="dessert"><span class="icon">🍰</span> Dessert</button>
+        <button class="cat-chip" data-cat="vegan"><span class="icon">🥗</span> Vegan</button>
+        <button class="cat-chip" data-cat="drinks"><span class="icon">☕</span> Drinks</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── RECIPES ─────────────────────────────────────────────── -->
+  <section id="menu" class="menu">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-tag">Featured</span>
+        <h2 class="section-title">Our <em>Recipes</em></h2>
+        <p class="section-subtitle">Each recipe is crafted with love, tested by our community, and ready to bring joy to your table.</p>
+      </div>
+
+      <!-- Recipe grid — community recipes are appended here by JS -->
+      <div class="menu-items" id="menu-grid">
+
+        <!-- ── ORIGINAL 9 RECIPES ─────────────────────────────────── -->
+
+        <div class="menu-item reveal" data-name="grilled salmon" data-tags="seafood fish healthy" data-time="22">
+          <div class="menu-item-img-wrap">
+            <span class="menu-item-badge">Seafood</span>
+            <button class="save-btn" data-id="grilled-salmon">🤍</button>
+            <img src="../image/Grilled Salmon.jpg" alt="Grilled Salmon" onerror="this.src='https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=600&q=80'">
+          </div>
+          <div class="menu-item-body">
+            <div class="menu-item-meta"><span class="meta-pill">⏱ 22 min</span><span class="meta-pill">👤 4 servings</span></div>
+            <h3>Perfect Grilled Salmon</h3>
+            <p>Fresh salmon grilled to perfection with a lemon-herb marinade. Ready in under 30 minutes.</p>
+          </div>
+          <div class="menu-item-footer">
+            <div class="author-row"><div class="author-avatar">A</div><span class="author-name">Al-Tabikh</span></div>
+            <div class="star-rating"><span class="star">⭐</span><span class="star">⭐</span><span class="star">⭐</span><span class="star">⭐</span><span class="star">⭐</span><span class="rating-count">(24)</span></div>
+          </div>
+          <a href="Grilled_Salmon.html" class="recipe-link">View Full Recipe →</a>
+        </div>
+
+        <div class="menu-item reveal" data-name="vegetable pasta" data-tags="pasta vegan vegetarian" data-time="30">
+          <div class="menu-item-img-wrap">
+            <span class="menu-item-badge">Pasta</span>
+            <button class="save-btn" data-id="vegetable-pasta">🤍</button>
+            <img src="../image/Vegetable Pasta.jpg" alt="Vegetable Pasta" onerror="this.src='https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=600&q=80'">
+          </div>
+          <div class="menu-item-body">
+            <div class="menu-item-meta"><span class="meta-pill">⏱ 30 min</span><span class="meta-pill">👤 4 servings</span></div>
+            <h3>Colorful Vegetable Pasta</h3>
+            <p>Light garlic-olive oil pasta tossed with seasonal vegetables and fresh herbs.</p>
+          </div>
+          <div class="menu-item-footer">
+            <div class="author-row"><div class="author-avatar">A</div><span class="author-name">Al-Tabikh</span></div>
+            <div class="star-rating"><span class="star">⭐</span><span class="star">⭐</span><span class="star">⭐</span><span class="star">⭐</span><span class="star">☆</span><span class="rating-count">(18)</span></div>
+          </div>
+          <a href="Vegetable_Pasta.html" class="recipe-link">View Full Recipe →</a>
+        </div>
+
+        <div class="menu-item reveal" data-name="chicken curry" data-tags="chicken indian spicy" data-time="50">
+          <div class="menu-item-img-wrap">
+            <span class="menu-item-badge">Chicken</span>
+            <button class="save-btn" data-id="chicken-curry">🤍</button>
+            <img src="../image/Chicken Curry.jpg" alt="Chicken Curry" onerror="this.src='https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=600&q=80'">
+          </div>
+          <div class="menu-item-body">
+            <div class="menu-item-meta"><span class="meta-pill">⏱ 50 min</span><span class="meta-pill">👤 4 servings</span></div>
+            <h3>Classic Chicken Curry</h3>
+            <p>Tender chicken in a rich tomato-onion gravy with aromatic spices. Perfect with rice or naan.</p>
+          </div>
+          <div class="menu-item-footer">
+            <div class="author-row"><div class="author-avatar">A</div><span class="author-name">Al-Tabikh</span></div>
+            <div class="star-rating"><span class="star">⭐</span><span class="star">⭐</span><span class="star">⭐</span><span class="star">⭐</span><span class="star">⭐</span><span class="rating-count">(31)</span></div>
+          </div>
+          <a href="Chicken_Curry.html" class="recipe-link">View Full Recipe →</a>
+        </div>
+
+        <div class="menu-item reveal" data-name="chocolate cake" data-tags="dessert baking chocolate sweet" data-time="55">
+          <div class="menu-item-img-wrap">
+            <span class="menu-item-badge">Dessert</span>
+            <button class="save-btn" data-id="chocolate-cake">🤍</button>
+            <img src="../image/Chocolate Cake.jpg" alt="Chocolate Cake" onerror="this.src='https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=600&q=80'">
+          </div>
+          <div class="menu-item-body">
+            <div class="menu-item-meta"><span class="meta-pill">⏱ 55 min</span><span class="meta-pill">👤 10 servings</span></div>
+            <h3>Classic Chocolate Cake</h3>
+            <p>Rich, moist, and intensely chocolaty. Perfect for birthdays and celebrations.</p>
+          </div>
+          <div class="menu-item-footer">
+            <div class="author-row"><div class="author-avatar">A</div><span class="author-name">Al-Tabikh</span></div>
+            <div class="star-rating"><span class="star">⭐</span><span class="star">⭐</span><span class="star">⭐</span><span class="star">⭐</span><span class="star">⭐</span><span class="rating-count">(42)</span></div>
+          </div>
+          <a href="Chocolate_Cake.html" class="recipe-link">View Full Recipe →</a>
+        </div>
+
+        <div class="menu-item reveal" data-name="chocolate lava cake" data-tags="dessert chocolate baking" data-time="22">
+          <div class="menu-item-img-wrap">
+            <span class="menu-item-badge">Dessert</span>
+            <button class="save-btn" data-id="lava-cake">🤍</button>
+            <img src="../image/Chocolate Lava Cake.jpg" alt="Chocolate Lava Cake" onerror="this.src='https://images.unsplash.com/photo-1624353365286-3f8d62daad51?w=600&q=80'">
+          </div>
+          <div class="menu-item-body">
+            <div class="menu-item-meta"><span class="meta-pill">⏱ 22 min</span><span class="meta-pill">👤 4 servings</span></div>
+            <h3>Chocolate Lava Cake</h3>
+            <p>Warm molten chocolate cake with a gooey centre. An impressive dessert in under 30 minutes.</p>
+          </div>
+          <div class="menu-item-footer">
+            <div class="author-row"><div class="author-avatar">A</div><span class="author-name">Al-Tabikh</span></div>
+            <div class="star-rating"><span class="star">⭐</span><span class="star">⭐</span><span class="star">⭐</span><span class="star">⭐</span><span class="star">⭐</span><span class="rating-count">(29)</span></div>
+          </div>
+          <a href="Chocolate_Lava_Cake.html" class="recipe-link">View Full Recipe →</a>
+        </div>
+
+        <div class="menu-item reveal" data-name="creamy mushroom risotto" data-tags="pasta vegetarian italian" data-time="45">
+          <div class="menu-item-img-wrap">
+            <span class="menu-item-badge">Pasta</span>
+            <button class="save-btn" data-id="mushroom-risotto">🤍</button>
+            <img src="../image/Creamy Mushroom Risotto.webp" alt="Mushroom Risotto" onerror="this.src='https://images.unsplash.com/photo-1476124369491-e7addf5db371?w=600&q=80'">
+          </div>
+          <div class="menu-item-body">
+            <div class="menu-item-meta"><span class="meta-pill">⏱ 45 min</span><span class="meta-pill">👤 4 servings</span></div>
+            <h3>Creamy Mushroom Risotto</h3>
+            <p>Italian classic Arborio rice cooked with sautéed mushrooms and Parmesan cheese.</p>
+          </div>
+          <div class="menu-item-footer">
+            <div class="author-row"><div class="author-avatar">A</div><span class="author-name">Al-Tabikh</span></div>
+            <div class="star-rating"><span class="star">⭐</span><span class="star">⭐</span><span class="star">⭐</span><span class="star">⭐</span><span class="star">☆</span><span class="rating-count">(15)</span></div>
+          </div>
+          <a href="Creamy_Mushroom_Risotto.html" class="recipe-link">View Full Recipe →</a>
+        </div>
+
+        <div class="menu-item reveal" data-name="lemon garlic roast chicken" data-tags="chicken roast oven" data-time="90">
+          <div class="menu-item-img-wrap">
+            <span class="menu-item-badge">Chicken</span>
+            <button class="save-btn" data-id="roast-chicken">🤍</button>
+            <img src="../image/Lemon Garlic Roast Chicken.jpg" alt="Roast Chicken" onerror="this.src='https://images.unsplash.com/photo-1598103442097-8b74394b95c2?w=600&q=80'">
+          </div>
+          <div class="menu-item-body">
+            <div class="menu-item-meta"><span class="meta-pill">⏱ 90 min</span><span class="meta-pill">👤 4 servings</span></div>
+            <h3>Lemon Garlic Roast Chicken</h3>
+            <p>Juicy, golden roast chicken with bright citrus and garlic. A stunning centrepiece.</p>
+          </div>
+          <div class="menu-item-footer">
+            <div class="author-row"><div class="author-avatar">A</div><span class="author-name">Al-Tabikh</span></div>
+            <div class="star-rating"><span class="star">⭐</span><span class="star">⭐</span><span class="star">⭐</span><span class="star">⭐</span><span class="star">⭐</span><span class="rating-count">(20)</span></div>
+          </div>
+          <a href="Lemon_Garlic_Roast_Chicken.html" class="recipe-link">View Full Recipe →</a>
+        </div>
+
+        <div class="menu-item reveal" data-name="tofu larb thai salad" data-tags="vegan thai salad" data-time="25">
+          <div class="menu-item-img-wrap">
+            <span class="menu-item-badge">Vegan</span>
+            <button class="save-btn" data-id="tofu-larb">🤍</button>
+            <img src="../image/Tofu Larb.jpg" alt="Tofu Larb" onerror="this.src='https://images.unsplash.com/photo-1512058564366-18510be2db19?w=600&q=80'">
+          </div>
+          <div class="menu-item-body">
+            <div class="menu-item-meta"><span class="meta-pill">⏱ 25 min</span><span class="meta-pill">👤 4 servings</span></div>
+            <h3>Tofu Larb (Vegan Thai Salad)</h3>
+            <p>Vibrant, spicy Thai-inspired salad with crumbled tofu, fresh herbs, and lime.</p>
+          </div>
+          <div class="menu-item-footer">
+            <div class="author-row"><div class="author-avatar">A</div><span class="author-name">Al-Tabikh</span></div>
+            <div class="star-rating"><span class="star">⭐</span><span class="star">⭐</span><span class="star">⭐</span><span class="star">⭐</span><span class="star">☆</span><span class="rating-count">(11)</span></div>
+          </div>
+          <a href="Tofu_Larb.html" class="recipe-link">View Full Recipe →</a>
+        </div>
+
+        <div class="menu-item reveal" data-name="vietnamese coffee smoothie" data-tags="drinks coffee beverage" data-time="15">
+          <div class="menu-item-img-wrap">
+            <span class="menu-item-badge">Drinks</span>
+            <button class="save-btn" data-id="coffee-smoothie">🤍</button>
+            <img src="../image/Vietnamese Coffee Smoothie.jpg" alt="Vietnamese Coffee Smoothie" onerror="this.src='https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=600&q=80'">
+          </div>
+          <div class="menu-item-body">
+            <div class="menu-item-meta"><span class="meta-pill">⏱ 15 min</span><span class="meta-pill">👤 2 servings</span></div>
+            <h3>Vietnamese Coffee Smoothie</h3>
+            <p>Rich, creamy blend of bold Vietnamese coffee, condensed milk, and ice.</p>
+          </div>
+          <div class="menu-item-footer">
+            <div class="author-row"><div class="author-avatar">A</div><span class="author-name">Al-Tabikh</span></div>
+            <div class="star-rating"><span class="star">⭐</span><span class="star">⭐</span><span class="star">⭐</span><span class="star">⭐</span><span class="star">⭐</span><span class="rating-count">(17)</span></div>
+          </div>
+          <a href="Vietnamese_Coffee_Smoothie.html" class="recipe-link">View Full Recipe →</a>
+        </div>
+
+        <!-- ── 10 NEW RECIPES ──────────────────────────────────────── -->
+
+        <div class="menu-item reveal" data-name="street-style beef tacos" data-tags="beef mexican street-food" data-time="35">
+          <div class="menu-item-img-wrap">
+            <span class="menu-item-badge">Beef</span>
+            <button class="save-btn" data-id="beef-tacos">🤍</button>
+            <img src="../image/Beef Tacos.jpg" alt="Street-Style Beef Tacos" onerror="this.src='https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=800&q=80'">
+          </div>
+          <div class="menu-item-body">
+            <div class="menu-item-meta"><span class="meta-pill">⏱ 35 min</span><span class="meta-pill">👤 4 servings</span></div>
+            <h3>Street-Style Beef Tacos</h3>
+            <p>Juicy seasoned beef tacos loaded with fresh salsa, avocado, and lime. A fiesta on every plate.</p>
+          </div>
+          <div class="menu-item-footer">
+            <div class="author-row"><div class="author-avatar">A</div><span class="author-name">Al-Tabikh</span></div>
+            <div class="star-rating"><span class="star">⭐</span><span class="star">⭐</span><span class="star">⭐</span><span class="star">⭐</span><span class="star">⭐</span><span class="rating-count">(33)</span></div>
+          </div>
+          <a href="Beef_Tacos.html" class="recipe-link">View Full Recipe →</a>
+        </div>
+
+        <div class="menu-item reveal" data-name="classic shakshuka" data-tags="vegan vegetarian middle-eastern eggs" data-time="30">
+          <div class="menu-item-img-wrap">
+            <span class="menu-item-badge">Vegan</span>
+            <button class="save-btn" data-id="shakshuka">🤍</button>
+            <img src="../image/Shakshuka.jpg" alt="Classic Shakshuka" onerror="this.src='https://images.unsplash.com/photo-1590479773265-7464e5d48118?w=800&q=80'">
+          </div>
+          <div class="menu-item-body">
+            <div class="menu-item-meta"><span class="meta-pill">⏱ 30 min</span><span class="meta-pill">👤 4 servings</span></div>
+            <h3>Classic Shakshuka</h3>
+            <p>Eggs poached in a richly spiced tomato and pepper sauce. The ultimate one-pan comfort meal.</p>
+          </div>
+          <div class="menu-item-footer">
+            <div class="author-row"><div class="author-avatar">A</div><span class="author-name">Al-Tabikh</span></div>
+            <div class="star-rating"><span class="star">⭐</span><span class="star">⭐</span><span class="star">⭐</span><span class="star">⭐</span><span class="star">☆</span><span class="rating-count">(28)</span></div>
+          </div>
+          <a href="Shakshuka.html" class="recipe-link">View Full Recipe →</a>
+        </div>
+
+        <div class="menu-item reveal" data-name="butter chicken murgh makhani" data-tags="chicken indian creamy curry" data-time="60">
+          <div class="menu-item-img-wrap">
+            <span class="menu-item-badge">Chicken</span>
+            <button class="save-btn" data-id="butter-chicken">🤍</button>
+            <img src="../image/Butter Chicken.jpg" alt="Butter Chicken" onerror="this.src='https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?w=800&q=80'">
+          </div>
+          <div class="menu-item-body">
+            <div class="menu-item-meta"><span class="meta-pill">⏱ 60 min</span><span class="meta-pill">👤 4 servings</span></div>
+            <h3>Butter Chicken (Murgh Makhani)</h3>
+            <p>Silky, rich tomato-cream sauce with tender marinated chicken. The world's most beloved curry.</p>
+          </div>
+          <div class="menu-item-footer">
+            <div class="author-row"><div class="author-avatar">A</div><span class="author-name">Al-Tabikh</span></div>
+            <div class="star-rating"><span class="star">⭐</span><span class="star">⭐</span><span class="star">⭐</span><span class="star">⭐</span><span class="star">⭐</span><span class="rating-count">(45)</span></div>
+          </div>
+          <a href="Butter_Chicken.html" class="recipe-link">View Full Recipe →</a>
+        </div>
+
+        <div class="menu-item reveal" data-name="spaghetti carbonara" data-tags="pasta italian classic" data-time="25">
+          <div class="menu-item-img-wrap">
+            <span class="menu-item-badge">Pasta</span>
+            <button class="save-btn" data-id="spaghetti-carbonara">🤍</button>
+            <img src="../image/Spaghetti Carbonara.jpg" alt="Spaghetti Carbonara" onerror="this.src='https://images.unsplash.com/photo-1612874742237-6526221588e3?w=800&q=80'">
+          </div>
+          <div class="menu-item-body">
+            <div class="menu-item-meta"><span class="meta-pill">⏱ 25 min</span><span class="meta-pill">👤 4 servings</span></div>
+            <h3>Spaghetti Carbonara</h3>
+            <p>The Roman classic — silky egg and Pecorino sauce with crispy guanciale. No cream, no shortcuts.</p>
+          </div>
+          <div class="menu-item-footer">
+            <div class="author-row"><div class="author-avatar">A</div><span class="author-name">Al-Tabikh</span></div>
+            <div class="star-rating"><span class="star">⭐</span><span class="star">⭐</span><span class="star">⭐</span><span class="star">⭐</span><span class="star">⭐</span><span class="rating-count">(38)</span></div>
+          </div>
+          <a href="Spaghetti_Carbonara.html" class="recipe-link">View Full Recipe →</a>
+        </div>
+
+        <div class="menu-item reveal" data-name="classic caesar salad" data-tags="salad healthy classic" data-time="20">
+          <div class="menu-item-img-wrap">
+            <span class="menu-item-badge">Salad</span>
+            <button class="save-btn" data-id="caesar-salad">🤍</button>
+            <img src="../image/Caesar Salad.jpg" alt="Classic Caesar Salad" onerror="this.src='https://images.unsplash.com/photo-1550304943-4f24f54ddde9?w=800&q=80'">
+          </div>
+          <div class="menu-item-body">
+            <div class="menu-item-meta"><span class="meta-pill">⏱ 20 min</span><span class="meta-pill">👤 4 servings</span></div>
+            <h3>Classic Caesar Salad</h3>
+            <p>Crisp romaine with a garlicky dressing, golden croutons, and shaved Parmesan. A timeless classic.</p>
+          </div>
+          <div class="menu-item-footer">
+            <div class="author-row"><div class="author-avatar">A</div><span class="author-name">Al-Tabikh</span></div>
+            <div class="star-rating"><span class="star">⭐</span><span class="star">⭐</span><span class="star">⭐</span><span class="star">⭐</span><span class="star">☆</span><span class="rating-count">(22)</span></div>
+          </div>
+          <a href="Caesar_Salad.html" class="recipe-link">View Full Recipe →</a>
+        </div>
+
+        <div class="menu-item reveal" data-name="tom yum goong thai prawn soup" data-tags="seafood thai soup spicy" data-time="30">
+          <div class="menu-item-img-wrap">
+            <span class="menu-item-badge">Seafood</span>
+            <button class="save-btn" data-id="tom-yum-soup">🤍</button>
+            <img src="../image/Tom Yum Soup.jpg" alt="Tom Yum Goong" onerror="this.src='https://images.unsplash.com/photo-1562802378-063ec186a863?w=800&q=80'">
+          </div>
+          <div class="menu-item-body">
+            <div class="menu-item-meta"><span class="meta-pill">⏱ 30 min</span><span class="meta-pill">👤 4 servings</span></div>
+            <h3>Tom Yum Goong (Thai Prawn Soup)</h3>
+            <p>Thailand's iconic hot and sour prawn soup with lemongrass, galangal, and kaffir lime leaves.</p>
+          </div>
+          <div class="menu-item-footer">
+            <div class="author-row"><div class="author-avatar">A</div><span class="author-name">Al-Tabikh</span></div>
+            <div class="star-rating"><span class="star">⭐</span><span class="star">⭐</span><span class="star">⭐</span><span class="star">⭐</span><span class="star">☆</span><span class="rating-count">(25)</span></div>
+          </div>
+          <a href="Tom_Yum_Soup.html" class="recipe-link">View Full Recipe →</a>
+        </div>
+
+        <div class="menu-item reveal" data-name="moist banana bread" data-tags="dessert baking sweet snack" data-time="65">
+          <div class="menu-item-img-wrap">
+            <span class="menu-item-badge">Dessert</span>
+            <button class="save-btn" data-id="banana-bread">🤍</button>
+            <img src="../image/Banana Bread.jpg" alt="Moist Banana Bread" onerror="this.src='https://images.unsplash.com/photo-1509440159596-0249088772ff?w=800&q=80'">
+          </div>
+          <div class="menu-item-body">
+            <div class="menu-item-meta"><span class="meta-pill">⏱ 65 min</span><span class="meta-pill">👤 8 servings</span></div>
+            <h3>Moist Banana Bread</h3>
+            <p>The most comforting bake — rich, moist, and deeply banana-flavoured. Perfect for overripe bananas.</p>
+          </div>
+          <div class="menu-item-footer">
+            <div class="author-row"><div class="author-avatar">A</div><span class="author-name">Al-Tabikh</span></div>
+            <div class="star-rating"><span class="star">⭐</span><span class="star">⭐</span><span class="star">⭐</span><span class="star">⭐</span><span class="star">⭐</span><span class="rating-count">(36)</span></div>
+          </div>
+          <a href="Banana_Bread.html" class="recipe-link">View Full Recipe →</a>
+        </div>
+
+        <div class="menu-item reveal" data-name="avocado toast poached egg" data-tags="vegan healthy breakfast brunch" data-time="15">
+          <div class="menu-item-img-wrap">
+            <span class="menu-item-badge">Brunch</span>
+            <button class="save-btn" data-id="avocado-toast">🤍</button>
+            <img src="../image/Avocado Toast.jpg" alt="Avocado Toast with Poached Egg" onerror="this.src='https://images.unsplash.com/photo-1525351484163-7529414344d8?w=800&q=80'">
+          </div>
+          <div class="menu-item-body">
+            <div class="menu-item-meta"><span class="meta-pill">⏱ 15 min</span><span class="meta-pill">👤 2 servings</span></div>
+            <h3>Avocado Toast with Poached Egg</h3>
+            <p>Creamy smashed avocado on sourdough with a runny poached egg and chili flakes. The brunch icon.</p>
+          </div>
+          <div class="menu-item-footer">
+            <div class="author-row"><div class="author-avatar">A</div><span class="author-name">Al-Tabikh</span></div>
+            <div class="star-rating"><span class="star">⭐</span><span class="star">⭐</span><span class="star">⭐</span><span class="star">⭐</span><span class="star">⭐</span><span class="rating-count">(41)</span></div>
+          </div>
+          <a href="Avocado_Toast.html" class="recipe-link">View Full Recipe →</a>
+        </div>
+
+        <div class="menu-item reveal" data-name="mango lassi indian yogurt drink" data-tags="drinks indian beverage mango" data-time="5">
+          <div class="menu-item-img-wrap">
+            <span class="menu-item-badge">Drinks</span>
+            <button class="save-btn" data-id="mango-lassi">🤍</button>
+            <img src="../image/Mango Lassi.jpg" alt="Mango Lassi" onerror="this.src='https://images.unsplash.com/photo-1626200419199-391ae4be7a41?w=800&q=80'">
+          </div>
+          <div class="menu-item-body">
+            <div class="menu-item-meta"><span class="meta-pill">⏱ 5 min</span><span class="meta-pill">👤 2 servings</span></div>
+            <h3>Mango Lassi</h3>
+            <p>The refreshing Indian yogurt-mango drink — thick, fragrant, and beautifully cooling. Summer in a glass.</p>
+          </div>
+          <div class="menu-item-footer">
+            <div class="author-row"><div class="author-avatar">A</div><span class="author-name">Al-Tabikh</span></div>
+            <div class="star-rating"><span class="star">⭐</span><span class="star">⭐</span><span class="star">⭐</span><span class="star">⭐</span><span class="star">☆</span><span class="rating-count">(20)</span></div>
+          </div>
+          <a href="Mango_Lassi.html" class="recipe-link">View Full Recipe →</a>
+        </div>
+
+        <div class="menu-item reveal" data-name="authentic greek salad horiatiki" data-tags="vegan salad mediterranean healthy" data-time="15">
+          <div class="menu-item-img-wrap">
+            <span class="menu-item-badge">Vegan</span>
+            <button class="save-btn" data-id="greek-salad">🤍</button>
+            <img src="../image/Greek Salad.jpg" alt="Authentic Greek Salad" onerror="this.src='https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=800&q=80'">
+          </div>
+          <div class="menu-item-body">
+            <div class="menu-item-meta"><span class="meta-pill">⏱ 15 min</span><span class="meta-pill">👤 4 servings</span></div>
+            <h3>Authentic Greek Salad (Horiatiki)</h3>
+            <p>Chunky tomatoes, cucumber, Kalamata olives, and a slab of feta doused in the finest olive oil.</p>
+          </div>
+          <div class="menu-item-footer">
+            <div class="author-row"><div class="author-avatar">A</div><span class="author-name">Al-Tabikh</span></div>
+            <div class="star-rating"><span class="star">⭐</span><span class="star">⭐</span><span class="star">⭐</span><span class="star">⭐</span><span class="star">☆</span><span class="rating-count">(26)</span></div>
+          </div>
+          <a href="Greek_Salad.html" class="recipe-link">View Full Recipe →</a>
+        </div>
+
+        <!-- No-results message -->
+        <div id="no-results" class="no-results" style="display:none;">
+          <div class="emoji">🔍</div>
+          <h3>No recipes found</h3>
+          <p>Try a different search term or category.</p>
+        </div>
+
+      </div><!-- end #menu-grid -->
+    </div>
+  </section>
+
+  <!-- ── UPLOAD CTA ──────────────────────────────────────────── -->
+  <section class="upload-cta reveal">
+    <div class="container">
+      <h2>Have a Recipe to <em>Share?</em></h2>
+      <p>Join our community of home chefs and share your favourite dishes with the world.</p>
+      <a href="upload.html" class="btn">📤 Upload Your Recipe</a>
+    </div>
+  </section>
+
+  <!-- ── ABOUT ──────────────────────────────────────────────── -->
+  <section id="about" class="about">
+    <div class="container">
+      <div class="about-content">
+        <div class="about-text reveal">
+          <span class="section-tag">Our Story</span>
+          <h2>Cooking is <em>Community</em></h2>
+          <p>Al-Tabikh (Arabic for "The Cook") was born from a simple belief: great food should be shared. We're a community platform where home chefs from Dammam and beyond come together to discover, create, and celebrate food.</p>
+          <p>Every recipe on our platform is tried, tested, and loved. From quick weeknight meals to weekend showstoppers — we have something for every table.</p>
+          <a href="upload.html" class="btn btn-outline" style="margin-top:12px;">Join Our Community</a>
+        </div>
+        <div class="about-image reveal">
+          <div class="about-img-main">
+            <img src="../image/Food2.jpg" alt="About Al-Tabikh" onerror="this.src='https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&q=80'">
+          </div>
+          <div class="about-badge">
+            <span class="num" id="about-count">19+</span>
+            <span class="lbl">Delicious Recipes</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CONTACT ─────────────────────────────────────────────── -->
+  <section id="contact" class="contact">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-tag">Get In Touch</span>
+        <h2 class="section-title">We'd Love to <em>Hear From You</em></h2>
+      </div>
+      <div class="contact-content">
+        <div class="contact-info reveal">
+          <h3>📍 Location</h3>
+          <p>PMU, Dammam City, Saudi Arabia</p>
+          <h3>📞 Contact</h3>
+          <p>Phone: 05123456789</p>
+          <p>Email: <a href="mailto:hello@altabikh.com">hello@altabikh.com</a></p>
+          <h3>🕐 Hours</h3>
+          <p>We're online 24/7.<br>Email replies within 24 hours.</p>
+        </div>
+        <div class="contact-card reveal">
+          <h3>Send Us a Message</h3>
+          <form class="contact-form-el">
+            <div class="form-group"><input type="text" name="name" placeholder="Your Name" required></div>
+            <div class="form-group"><input type="email" name="email" placeholder="Your Email" required></div>
+            <div class="form-group"><textarea name="message" placeholder="Your message…" required></textarea></div>
+            <button type="submit" class="btn" style="width:100%;justify-content:center;">Send Message ✉️</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ─────────────────────────────────────────────── -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-logo">
+          <h2>Al-<span>Tabikh</span></h2>
+          <p>A community kitchen where passion meets plate. Sharing the joy of cooking, one recipe at a time.</p>
+        </div>
+        <div class="footer-col">
+          <h3>Explore</h3>
+          <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#menu">Recipes</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="upload.html">Upload Recipe</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3>New Recipes</h3>
+          <ul>
+            <li><a href="Beef_Tacos.html">Beef Tacos</a></li>
+            <li><a href="Butter_Chicken.html">Butter Chicken</a></li>
+            <li><a href="Spaghetti_Carbonara.html">Spaghetti Carbonara</a></li>
+            <li><a href="Shakshuka.html">Shakshuka</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3>Follow Us</h3>
+          <div class="social-row">
+            <a href="https://www.facebook.com/" target="_blank" class="social-link">
+              <img src="../image/facebook.png" alt="Facebook" onerror="this.parentElement.textContent='📘'">
+            </a>
+            <a href="https://www.instagram.com/" target="_blank" class="social-link">
+              <img src="../image/instagram.png" alt="Instagram" onerror="this.parentElement.textContent='📷'">
+            </a>
+            <a href="https://x.com/" target="_blank" class="social-link">
+              <img src="../image/twitter.png" alt="Twitter" onerror="this.parentElement.textContent='🐦'">
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 Al-Tabikh. All rights reserved.</p>
+        <p>Made with ❤️ in Dammam</p>
+      </div>
+    </div>
+  </footer>
+
+  <div id="toast" class="toast"></div>
+  <script src="../javascript/script.js"></script>
+  <script>
+    // Update recipe count with community uploads
+    try {
+      const community = JSON.parse(localStorage.getItem('altabikh-community') || '[]');
+      const base = 19;
+      const total = base + community.length;
+      document.getElementById('stat-count').textContent = total + '+';
+      document.getElementById('about-count').textContent = total + '+';
+    } catch(e) {}
+  </script>
+</body>
+</html>

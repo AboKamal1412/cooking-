@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vietnamese Coffee Smoothie — Al-Tabikh</title>
+  <link rel="stylesheet" href="../CSS/styles2.css">
+</head>
+<body data-recipe="coffee-smoothie">
+  <nav class="recipe-nav">
+    <a href="home.html" class="back-btn">← Back to Recipes</a>
+    <span class="recipe-nav-title">Vietnamese Coffee Smoothie</span>
+    <div class="nav-actions-right">
+      <button class="save-recipe-btn" data-id="coffee-smoothie">🤍 Save</button>
+      <button class="dark-toggle" aria-label="Toggle dark mode"></button>
+    </div>
+  </nav>
+  <div class="recipe-wrapper">
+    <div class="recipe-header">
+      <span class="recipe-category">☕ Drinks</span>
+      <h1>Vietnamese Coffee Smoothie</h1>
+      <div class="recipe-intro-text">Rich, creamy, and energizing blend of bold Vietnamese coffee, sweetened condensed milk, and ice. The perfect pick-me-up drink any time of day.</div>
+    </div>
+    <img src="../image/Vietnamese Coffee Smoothie.jpg" alt="Vietnamese Coffee Smoothie" class="recipe-hero-img"
+      onerror="this.src='https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=800&q=80'">
+    <div class="recipe-meta">
+      <div><strong>Prep Time</strong><span class="value">5 min</span></div>
+      <div><strong>Cook Time</strong><span class="value" id="cook-time-value">10</span></div>
+      <div><strong>Total Time</strong><span class="value">15 min</span></div>
+      <div>
+        <strong>Servings</strong>
+        <select id="serving-size" class="serving-select">
+          <option value="1">1 servings</option><option value="2" selected>2 servings</option><option value="4">4 servings</option>
+        </select>
+      </div>
+    </div>
+    <div class="cooking-timer">
+      <h3>⏱ Cooking Timer</h3>
+      <div class="timer-display" id="timer-display">--:--</div>
+      <div class="timer-controls">
+        <button id="start-timer" class="timer-btn timer-btn-start">Start</button>
+        <button id="reset-timer" class="timer-btn timer-btn-reset">Reset</button>
+      </div>
+    </div>
+    <div class="recipe-section">
+      <h2 class="recipe-section-title">Ingredients</h2>
+      <ul class="ingredients-list"><li><div class="ingredient-check">✓</div><span>½ cup strong brewed Vietnamese coffee (cooled)</span></li><li><div class="ingredient-check">✓</div><span>½ cup sweetened condensed milk (adjust to taste)</span></li><li><div class="ingredient-check">✓</div><span>1 banana (for creaminess)</span></li><li><div class="ingredient-check">✓</div><span>1 cup ice or frozen coffee cubes</span></li><li><div class="ingredient-check">✓</div><span>¼ cup milk or coconut milk</span></li></ul>
+    </div>
+    <div class="recipe-section">
+      <h2 class="recipe-section-title">Instructions</h2>
+      <ol class="instructions-list"><li><div class="step-num">1</div><span>Brew Vietnamese coffee and let it cool completely.</span></li><li><div class="step-num">2</div><span>Combine coffee, condensed milk, banana, and ice in a blender.</span></li><li><div class="step-num">3</div><span>Blend until smooth and creamy. Add milk if you want it thinner.</span></li><li><div class="step-num">4</div><span>Pour into chilled glasses and serve immediately.</span></li></ol>
+    </div>
+    <div class="recipe-section">
+      <h2 class="recipe-section-title">Chef's Tips</h2>
+      <div class="tips-box"><ul><li>Use authentic Vietnamese coffee for best flavour.</li><li>Freeze coffee into ice cubes to prevent dilution.</li><li>Adjust condensed milk to control sweetness.</li><li>Coconut milk adds a lovely tropical note.</li></ul></div>
+    </div>
+    <div class="recipe-section">
+      <h2 class="recipe-section-title">Serving Suggestions</h2>
+      <ul class="serving-list"><li>Serve in a tall chilled glass or mason jar</li><li>Sprinkle crushed peanuts for crunch</li><li>Pair with a light Vietnamese dessert</li><li>Dust cocoa powder on top</li></ul>
+    </div>
+    <div class="recipe-section reviews-section">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:12px;">
+        <h2 class="recipe-section-title" style="margin-bottom:0;border-bottom:none;padding-bottom:0;">Reviews</h2>
+        <button class="write-review-btn">✏️ Write a Review</button>
+      </div>
+      <div class="reviews-summary">
+        <div>
+          <div class="avg-rating-big">—</div>
+          <div class="avg-stars">☆☆☆☆☆</div>
+          <div class="avg-count">No reviews yet</div>
+        </div>
+        <div class="rating-bars">
+          <div class="rating-bar-row"><span>5</span><div class="bar-track"><div class="bar-fill" id="bar-5" style="width:0%"></div></div></div>
+          <div class="rating-bar-row"><span>4</span><div class="bar-track"><div class="bar-fill" id="bar-4" style="width:0%"></div></div></div>
+          <div class="rating-bar-row"><span>3</span><div class="bar-track"><div class="bar-fill" id="bar-3" style="width:0%"></div></div></div>
+          <div class="rating-bar-row"><span>2</span><div class="bar-track"><div class="bar-fill" id="bar-2" style="width:0%"></div></div></div>
+          <div class="rating-bar-row"><span>1</span><div class="bar-track"><div class="bar-fill" id="bar-1" style="width:0%"></div></div></div>
+        </div>
+      </div>
+      <div class="review-form">
+        <h4>Share Your Experience</h4>
+        <div class="star-picker">
+          <span class="star-pick">⭐</span><span class="star-pick">⭐</span>
+          <span class="star-pick">⭐</span><span class="star-pick">⭐</span><span class="star-pick">⭐</span>
+        </div>
+        <div class="form-row">
+          <input type="text" id="reviewer-name" placeholder="Your name *">
+          <input type="email" placeholder="Email (optional)">
+        </div>
+        <textarea id="review-text" placeholder="Tell us what you thought of this recipe…"></textarea>
+        <button class="submit-review-btn">Submit Review</button>
+      </div>
+      <div class="reviews-list"></div>
+    </div>
+  </div>
+  <div id="toast" class="toast"></div>
+  <script src="../javascript/script2.js"></script>
+</body>
+</html>

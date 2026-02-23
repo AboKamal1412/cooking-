@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tofu Larb (Vegan Thai Salad) — Al-Tabikh</title>
+  <link rel="stylesheet" href="../CSS/styles2.css">
+</head>
+<body data-recipe="tofu-larb">
+  <nav class="recipe-nav">
+    <a href="home.html" class="back-btn">← Back to Recipes</a>
+    <span class="recipe-nav-title">Tofu Larb (Vegan Thai Salad)</span>
+    <div class="nav-actions-right">
+      <button class="save-recipe-btn" data-id="tofu-larb">🤍 Save</button>
+      <button class="dark-toggle" aria-label="Toggle dark mode"></button>
+    </div>
+  </nav>
+  <div class="recipe-wrapper">
+    <div class="recipe-header">
+      <span class="recipe-category">🥗 Vegan</span>
+      <h1>Tofu Larb (Vegan Thai Salad)</h1>
+      <div class="recipe-intro-text">Vibrant, spicy, and tangy Thai-inspired salad with crumbled tofu, fresh herbs, and lime. All the punchy flavours of traditional larb — plant-based.</div>
+    </div>
+    <img src="../image/Tofu Larb.jpg" alt="Tofu Larb (Vegan Thai Salad)" class="recipe-hero-img"
+      onerror="this.src='https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=800&q=80'">
+    <div class="recipe-meta">
+      <div><strong>Prep Time</strong><span class="value">15 min</span></div>
+      <div><strong>Cook Time</strong><span class="value" id="cook-time-value">10</span></div>
+      <div><strong>Total Time</strong><span class="value">25 min</span></div>
+      <div>
+        <strong>Servings</strong>
+        <select id="serving-size" class="serving-select">
+          <option value="2">2 servings</option><option value="4" selected>4 servings</option><option value="6">6 servings</option><option value="8">8 servings</option>
+        </select>
+      </div>
+    </div>
+    <div class="cooking-timer">
+      <h3>⏱ Cooking Timer</h3>
+      <div class="timer-display" id="timer-display">--:--</div>
+      <div class="timer-controls">
+        <button id="start-timer" class="timer-btn timer-btn-start">Start</button>
+        <button id="reset-timer" class="timer-btn timer-btn-reset">Reset</button>
+      </div>
+    </div>
+    <div class="recipe-section">
+      <h2 class="recipe-section-title">Ingredients</h2>
+      <ul class="ingredients-list"><li><div class="ingredient-check">✓</div><span>14 oz firm tofu, pressed and crumbled</span></li><li><div class="ingredient-check">✓</div><span>1 tbsp oil</span></li><li><div class="ingredient-check">✓</div><span>2 tbsp soy sauce</span></li><li><div class="ingredient-check">✓</div><span>2 tbsp fresh lime juice</span></li><li><div class="ingredient-check">✓</div><span>1 tbsp vegan fish sauce or extra soy sauce</span></li><li><div class="ingredient-check">✓</div><span>1 tsp maple syrup or sugar</span></li><li><div class="ingredient-check">✓</div><span>1 shallot, finely sliced</span></li><li><div class="ingredient-check">✓</div><span>1 Thai chili, chopped (optional)</span></li><li><div class="ingredient-check">✓</div><span>¼ cup fresh mint, chopped</span></li><li><div class="ingredient-check">✓</div><span>¼ cup cilantro, chopped</span></li><li><div class="ingredient-check">✓</div><span>2 tbsp toasted rice powder (optional)</span></li><li><div class="ingredient-check">✓</div><span>Lettuce leaves or rice for serving</span></li><li><div class="ingredient-check">✓</div><span>Lime wedges to garnish</span></li></ul>
+    </div>
+    <div class="recipe-section">
+      <h2 class="recipe-section-title">Instructions</h2>
+      <ol class="instructions-list"><li><div class="step-num">1</div><span>Heat oil in a skillet. Sauté crumbled tofu 5–6 minutes until lightly golden.</span></li><li><div class="step-num">2</div><span>Add soy sauce, lime juice, vegan fish sauce, and maple syrup. Cook 2–3 minutes.</span></li><li><div class="step-num">3</div><span>Turn off heat. Mix in shallots, chili, mint, cilantro, and toasted rice powder.</span></li><li><div class="step-num">4</div><span>Serve in lettuce cups or over rice, garnished with lime wedges.</span></li></ol>
+    </div>
+    <div class="recipe-section">
+      <h2 class="recipe-section-title">Chef's Tips</h2>
+      <div class="tips-box"><ul><li>Toast sticky rice in a dry pan until golden, then grind for authentic rice powder.</li><li>Press tofu very well to remove moisture before crumbling.</li><li>Adjust chili level to your preference.</li><li>Flavours deepen after chilling — great for meal prep.</li></ul></div>
+    </div>
+    <div class="recipe-section">
+      <h2 class="recipe-section-title">Serving Suggestions</h2>
+      <ul class="serving-list"><li>Butter lettuce or cabbage cups</li><li>Steamed jasmine rice</li><li>Pickled vegetables</li><li>Iced Thai tea or lime soda</li></ul>
+    </div>
+    <div class="recipe-section reviews-section">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:12px;">
+        <h2 class="recipe-section-title" style="margin-bottom:0;border-bottom:none;padding-bottom:0;">Reviews</h2>
+        <button class="write-review-btn">✏️ Write a Review</button>
+      </div>
+      <div class="reviews-summary">
+        <div>
+          <div class="avg-rating-big">—</div>
+          <div class="avg-stars">☆☆☆☆☆</div>
+          <div class="avg-count">No reviews yet</div>
+        </div>
+        <div class="rating-bars">
+          <div class="rating-bar-row"><span>5</span><div class="bar-track"><div class="bar-fill" id="bar-5" style="width:0%"></div></div></div>
+          <div class="rating-bar-row"><span>4</span><div class="bar-track"><div class="bar-fill" id="bar-4" style="width:0%"></div></div></div>
+          <div class="rating-bar-row"><span>3</span><div class="bar-track"><div class="bar-fill" id="bar-3" style="width:0%"></div></div></div>
+          <div class="rating-bar-row"><span>2</span><div class="bar-track"><div class="bar-fill" id="bar-2" style="width:0%"></div></div></div>
+          <div class="rating-bar-row"><span>1</span><div class="bar-track"><div class="bar-fill" id="bar-1" style="width:0%"></div></div></div>
+        </div>
+      </div>
+      <div class="review-form">
+        <h4>Share Your Experience</h4>
+        <div class="star-picker">
+          <span class="star-pick">⭐</span><span class="star-pick">⭐</span>
+          <span class="star-pick">⭐</span><span class="star-pick">⭐</span><span class="star-pick">⭐</span>
+        </div>
+        <div class="form-row">
+          <input type="text" id="reviewer-name" placeholder="Your name *">
+          <input type="email" placeholder="Email (optional)">
+        </div>
+        <textarea id="review-text" placeholder="Tell us what you thought of this recipe…"></textarea>
+        <button class="submit-review-btn">Submit Review</button>
+      </div>
+      <div class="reviews-list"></div>
+    </div>
+  </div>
+  <div id="toast" class="toast"></div>
+  <script src="../javascript/script2.js"></script>
+</body>
+</html>

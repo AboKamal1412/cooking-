@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recipe — Al-Tabikh</title>
+  <link rel="stylesheet" href="../CSS/styles2.css">
+  <style>
+    .not-found { text-align:center; padding:100px 24px; }
+    .not-found .icon { font-size:80px; margin-bottom:24px; }
+    .not-found h2 { font-family:'Playfair Display',serif; font-size:36px; font-weight:900; color:var(--dark); margin-bottom:12px; }
+    .not-found p  { font-size:16px; color:var(--mid-brown); margin-bottom:32px; }
+    .btn { display:inline-flex; align-items:center; gap:8px; background:var(--terracotta); color:white; padding:13px 28px; border:none; border-radius:100px; font-family:'DM Sans',sans-serif; font-size:15px; font-weight:600; cursor:pointer; transition:all 0.25s; text-decoration:none; }
+    .btn:hover { background:var(--rust); transform:translateY(-2px); }
+    .img-placeholder { width:100%; min-height:320px; background:linear-gradient(135deg,var(--amber),var(--terracotta)); border-radius:var(--radius); margin:28px 0; display:flex; align-items:center; justify-content:center; font-size:100px; box-shadow:var(--shadow); }
+    .tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-top:16px; }
+    .tag-pill { background:rgba(196,85,58,0.1); color:var(--terracotta); padding:5px 12px; border-radius:100px; font-size:13px; font-weight:600; }
+  </style>
+</head>
+<body data-recipe="">
+
+  <!-- NAV -->
+  <nav class="recipe-nav">
+    <a href="home.html" class="back-btn">← Back to Recipes</a>
+    <span class="recipe-nav-title" id="nav-title">Loading…</span>
+    <div class="nav-actions-right">
+      <button class="save-recipe-btn" data-id="" id="save-btn">🤍 Save</button>
+      <button class="dark-toggle" aria-label="Toggle dark mode"></button>
+    </div>
+  </nav>
+
+  <!-- NOT FOUND -->
+  <div class="not-found" id="not-found" style="display:none;">
+    <div class="icon">😕</div>
+    <h2>Recipe Not Found</h2>
+    <p>This recipe doesn't exist or may have been removed.</p>
+    <a href="home.html" class="btn">← Back to Recipes</a>
+  </div>
+
+  <!-- RECIPE CONTENT — injected by JS -->
+  <div class="recipe-wrapper" id="recipe-content" style="display:none;"></div>
+
+  <div id="toast" class="toast"></div>
+  <script src="../javascript/script2.js"></script>
+  <script>
+  (function() {
+    /* ── 1. Read ID from URL ──────────────────────────────────── */
+    const params = new URLSearchParams(window.location.search);
+    const id     = params.get('id');
+
+    if (!id) { showNotFound(); return; }
+
+    /* ── 2. Load recipe from localStorage ───────────────────── */
+    const all    = JSON.parse(localStorage.getItem('altabikh-community-recipes') || '[]');
+    const recipe = all.find(r => String(r.id) === String(id));
+
+    if (!recipe) { showNotFound(); return; }
+
+    /* ── 3. Set page meta ────────────────────────────────────── */
+    document.title = recipe.title + ' — Al-Tabikh';
+    document.body.dataset.recipe = 'community-' + id;
+
+    const navTitle = document.getElementById('nav-title');
+    const saveBtn  = document.getElementById('save-btn');
+    if (navTitle) navTitle.textContent = recipe.title;
+    if (saveBtn)  saveBtn.dataset.id   = 'community-' + id;
+
+    /* ── 4. Render full recipe ───────────────────────────────── */
+    const wrapper = document.getElementById('recipe-content');
+    wrapper.style.display = 'block';
+
+    const totalMins = (parseInt(recipe.prepTime) || 0) + (parseInt(recipe.cookTime) || 0);
+    const emoji = getCatEmoji(recipe.category);
+
+    // Image
+    const imgHtml = recipe.imageData
+      ? `<img src="${recipe.imageData}" alt="${esc(recipe.title)}" class="recipe-hero-img">`
+      : `<div class="img-placeholder">${emoji}</div>`;
+
+    // Ingredients
+    const ingsHtml = (recipe.ingredients || [])
+      .filter(Boolean)
+      .map(ing => `<li><div class="ingredient-check">✓</div><span>${esc(ing)}</span></li>`)
+      .join('');
+
+    // Steps
+    const stepsHtml = (recipe.steps || [])
+      .filter(Boolean)
+      .map((s, i) => `<li><div class="step-num">${i+1}</div><span>${esc(s)}</span></li>`)
+      .join('');
+
+    // Tags
+    const tagsHtml = (recipe.tags && recipe.tags.length)
+      ? `<div class="tag-list">${recipe.tags.map(t => `<span class="tag-pill">#${esc(t)}</span>`).join('')}</div>`
+      : '';
+
+    // Tips
+    const tipsHtml = recipe.tips
+      ? `<div class="recipe-section">
+          <h2 class="recipe-section-title">Chef's Tips</h2>
+          <div class="tips-box"><p style="font-size:15px;line-height:1.8;">${esc(recipe.tips)}</p></div>
+        </div>`
+      : '';
+
+    // Difficulty badge
+    const diffColor = { Easy: '#7A9E7E', Medium: '#E8923A', Hard: '#C4553A' };
+    const diffBadge = recipe.difficulty
+      ? `<span style="background:${diffColor[recipe.difficulty]||'#888'};color:white;padding:4px 12px;border-radius:100px;font-size:12px;font-weight:700;margin-left:8px;">${recipe.difficulty}</span>`
+      : '';
+
+    wrapper.innerHTML = `
+      <div class="recipe-header">
+        <span class="recipe-category">${emoji} ${esc(recipe.category || 'Recipe')} ${diffBadge}</span>
+        <h1>${esc(recipe.title)}</h1>
+        <div class="recipe-intro-text">${esc(recipe.description || '')}</div>
+        ${tagsHtml}
+      </div>
+
+      ${imgHtml}
+
+      <div class="recipe-meta">
+        <div><strong>Prep Time</strong><span class="value">${recipe.prepTime ? recipe.prepTime + ' min' : '–'}</span></div>
+        <div><strong>Cook Time</strong><span class="value" id="cook-time-value">${recipe.cookTime || '0'}</span></div>
+        <div><strong>Total Time</strong><span class="value">${totalMins ? totalMins + ' min' : '–'}</span></div>
+        <div>
+          <strong>Servings</strong>
+          <select id="serving-size" class="serving-select">
+            <option value="${recipe.servings || 4}" selected>${recipe.servings || 4} servings</option>
+            <option value="2">2 servings</option>
+            <option value="6">6 servings</option>
+            <option value="8">8 servings</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="cooking-timer">
+        <h3>⏱ Cooking Timer</h3>
+        <div class="timer-display" id="timer-display">--:--</div>
+        <div class="timer-controls">
+          <button id="start-timer" class="timer-btn timer-btn-start">Start</button>
+          <button id="reset-timer" class="timer-btn timer-btn-reset">Reset</button>
+        </div>
+      </div>
+
+      ${ingsHtml ? `
+      <div class="recipe-section">
+        <h2 class="recipe-section-title">Ingredients</h2>
+        <ul class="ingredients-list">${ingsHtml}</ul>
+      </div>` : ''}
+
+      ${stepsHtml ? `
+      <div class="recipe-section">
+        <h2 class="recipe-section-title">Instructions</h2>
+        <ol class="instructions-list">${stepsHtml}</ol>
+      </div>` : ''}
+
+      ${tipsHtml}
+
+      <div class="recipe-section">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:12px;">
+          <h2 class="recipe-section-title" style="margin-bottom:0;border-bottom:none;padding-bottom:0;">Reviews</h2>
+          <button class="write-review-btn">✏️ Write a Review</button>
+        </div>
+
+        <div class="reviews-summary">
+          <div>
+            <div class="avg-rating-big">—</div>
+            <div class="avg-stars">☆☆☆☆☆</div>
+            <div class="avg-count">No reviews yet</div>
+          </div>
+          <div class="rating-bars">
+            <div class="rating-bar-row"><span>5</span><div class="bar-track"><div class="bar-fill" id="bar-5" style="width:0%"></div></div></div>
+            <div class="rating-bar-row"><span>4</span><div class="bar-track"><div class="bar-fill" id="bar-4" style="width:0%"></div></div></div>
+            <div class="rating-bar-row"><span>3</span><div class="bar-track"><div class="bar-fill" id="bar-3" style="width:0%"></div></div></div>
+            <div class="rating-bar-row"><span>2</span><div class="bar-track"><div class="bar-fill" id="bar-2" style="width:0%"></div></div></div>
+            <div class="rating-bar-row"><span>1</span><div class="bar-track"><div class="bar-fill" id="bar-1" style="width:0%"></div></div></div>
+          </div>
+        </div>
+
+        <div class="review-form">
+          <h4>Share Your Experience</h4>
+          <div class="star-picker">
+            <span class="star-pick">⭐</span><span class="star-pick">⭐</span>
+            <span class="star-pick">⭐</span><span class="star-pick">⭐</span><span class="star-pick">⭐</span>
+          </div>
+          <div class="form-row">
+            <input type="text" id="reviewer-name" placeholder="Your name *">
+            <input type="email" placeholder="Email (optional)">
+          </div>
+          <textarea id="review-text" placeholder="Tell us what you thought of this recipe…"></textarea>
+          <button class="submit-review-btn">Submit Review</button>
+        </div>
+
+        <div class="reviews-list"></div>
+      </div>
+
+      <div style="margin-top:40px;padding-top:32px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+        <p style="font-size:13px;color:var(--mid-brown);">Recipe by <strong>${esc(recipe.author || 'Community Member')}</strong> · Submitted ${new Date(recipe.submittedAt||Date.now()).toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'})}</p>
+        <a href="home.html" class="btn" style="font-size:13px;padding:9px 20px;">← Back to All Recipes</a>
+      </div>
+    `;
+
+    /* ── 5. Re-init script2 features now that DOM is ready ───── */
+    // script2.js DOMContentLoaded already fired, re-trigger features manually
+    initRecipePage('community-' + id);
+
+  })();
+
+  function showNotFound() {
+    document.getElementById('not-found').style.display = 'block';
+    document.getElementById('recipe-content').style.display = 'none';
+    document.getElementById('nav-title').textContent = 'Not Found';
+  }
+
+  function getCatEmoji(cat) {
+    const m = {Seafood:'🐟',Chicken:'🍗',Pasta:'🍝',Dessert:'🍰',Vegan:'🥗',Drinks:'☕',Soups:'🍲',Salads:'🥙',Breakfast:'🍳'};
+    return m[cat] || '🍽️';
+  }
+
+  function esc(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+  /* ── Full re-init for dynamically injected content ─────────── */
+  function initRecipePage(recipeId) {
+    // Timer
+    const display  = document.getElementById('timer-display');
+    const startBtn = document.getElementById('start-timer');
+    const resetBtn = document.getElementById('reset-timer');
+    const cookEl   = document.getElementById('cook-time-value');
+    if (display && startBtn && resetBtn && cookEl) {
+      const cookMins = parseInt(cookEl.textContent.trim().split('-')[0]) || 20;
+      let totalSecs  = cookMins * 60, remaining = totalSecs, interval = null, running = false;
+      const fmt = s => `${String(Math.floor(s/60)).padStart(2,'0')}:${String(s%60).padStart(2,'0')}`;
+      display.textContent = fmt(remaining);
+      startBtn.addEventListener('click', () => {
+        if (running) { clearInterval(interval); interval=null; running=false; startBtn.textContent='Resume'; display.classList.remove('running'); }
+        else { if(!remaining) return; interval=setInterval(()=>{ if(remaining<=0){clearInterval(interval);interval=null;running=false;display.textContent='Done! 🎉';display.classList.remove('running');display.classList.add('done');startBtn.textContent='Start';showToast('Cooking time is up! 🍽️');return;}remaining--;display.textContent=fmt(remaining); },1000); running=true; startBtn.textContent='Pause'; display.classList.add('running'); display.classList.remove('done'); }
+      });
+      resetBtn.addEventListener('click', () => { clearInterval(interval);interval=null;running=false;remaining=totalSecs;display.textContent=fmt(remaining);display.classList.remove('running','done');startBtn.textContent='Start'; });
+    }
+
+    // Ingredient checkboxes
+    document.querySelectorAll('.ingredients-list li').forEach(li => li.addEventListener('click', () => li.classList.toggle('checked')));
+
+    // Star rating
+    const stars = document.querySelectorAll('.star-pick');
+    let selectedRating = 0;
+    stars.forEach((star, idx) => {
+      star.addEventListener('mouseenter', () => stars.forEach((s,i) => s.classList.toggle('active', i<=idx)));
+      star.addEventListener('mouseleave', () => stars.forEach((s,i) => s.classList.toggle('active', i<selectedRating)));
+      star.addEventListener('click', () => { selectedRating=idx+1; stars.forEach((s,i)=>s.classList.toggle('active',i<selectedRating)); });
+    });
+
+    // Write review toggle
+    const writeBtn = document.querySelector('.write-review-btn');
+    const rForm    = document.querySelector('.review-form');
+    if (writeBtn && rForm) writeBtn.addEventListener('click', () => { rForm.classList.toggle('open'); if(rForm.classList.contains('open')) rForm.scrollIntoView({behavior:'smooth',block:'nearest'}); });
+
+    // Submit review
+    const submitBtn = document.querySelector('.submit-review-btn');
+    if (submitBtn) {
+      submitBtn.addEventListener('click', () => {
+        const n = document.getElementById('reviewer-name')?.value.trim();
+        const t = document.getElementById('review-text')?.value.trim();
+        if (!selectedRating) { showToast('Please select a star rating','error'); return; }
+        if (!n) { showToast('Please enter your name','error'); return; }
+        if (!t) { showToast('Please write your review','error'); return; }
+        const key = 'altabikh-reviews-' + recipeId;
+        const reviews = JSON.parse(localStorage.getItem(key)||'[]');
+        reviews.unshift({ name:n, text:t, rating:selectedRating, date:new Date().toLocaleDateString('en-US',{year:'numeric',month:'short',day:'numeric'}) });
+        localStorage.setItem(key, JSON.stringify(reviews));
+        document.getElementById('reviewer-name').value = '';
+        document.getElementById('review-text').value = '';
+        selectedRating=0; stars.forEach(s=>s.classList.remove('active'));
+        if (rForm) rForm.classList.remove('open');
+        showToast('Review submitted! Thank you 🙏');
+        renderDynamicReviews(recipeId);
+        updateDynamicRatings(recipeId);
+      });
+    }
+
+    renderDynamicReviews(recipeId);
+    updateDynamicRatings(recipeId);
+  }
+
+  function renderDynamicReviews(recipeId) {
+    const list    = document.querySelector('.reviews-list');
+    if (!list) return;
+    const reviews = JSON.parse(localStorage.getItem('altabikh-reviews-' + recipeId)||'[]');
+    if (!reviews.length) { list.innerHTML='<p style="color:var(--mid-brown);font-size:14px;padding:16px 0;">Be the first to review this recipe!</p>'; return; }
+    list.innerHTML = reviews.map(r=>`<div class="review-card"><div class="review-card-header"><div class="reviewer-info"><div class="reviewer-avatar">${r.name.charAt(0).toUpperCase()}</div><div><div class="reviewer-name">${esc2(r.name)}</div><div class="review-date">${r.date}</div></div></div><div class="review-stars">${'⭐'.repeat(r.rating)}${'☆'.repeat(5-r.rating)}</div></div><p class="review-text">${esc2(r.text)}</p></div>`).join('');
+  }
+
+  function updateDynamicRatings(recipeId) {
+    const reviews = JSON.parse(localStorage.getItem('altabikh-reviews-' + recipeId)||'[]');
+    if (!reviews.length) return;
+    const avg = reviews.reduce((s,r)=>s+r.rating,0)/reviews.length;
+    const avgEl = document.querySelector('.avg-rating-big');
+    const cntEl = document.querySelector('.avg-count');
+    const stEl  = document.querySelector('.avg-stars');
+    if (avgEl) avgEl.textContent = avg.toFixed(1);
+    if (cntEl) cntEl.textContent = `${reviews.length} review${reviews.length!==1?'s':''}`;
+    if (stEl)  stEl.innerHTML = [1,2,3,4,5].map(i=>`<span class="avg-star">${i<=Math.round(avg)?'⭐':'☆'}</span>`).join('');
+    [1,2,3,4,5].forEach(n=>{ const b=document.getElementById('bar-'+n); if(b) b.style.width=`${(reviews.filter(r=>r.rating===n).length/reviews.length)*100}%`; });
+  }
+
+  function esc2(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+  </script>
+</body>
+</html>

@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Upload Recipe — Al-Tabikh</title>
+  <link rel="stylesheet" href="../CSS/styles2.css">
+  <style>
+    /* ── Upload-specific styles ─────────────────────────────────────── */
+    .upload-nav {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--page-bg); border-bottom: 1px solid var(--border);
+      padding: 0 32px; height: 64px;
+      display: flex; align-items: center; justify-content: space-between;
+      backdrop-filter: blur(16px);
+    }
+    .upload-wrapper {
+      max-width: 760px; margin: 0 auto; padding: 48px 24px 100px;
+    }
+    .upload-header { margin-bottom: 40px; }
+    .upload-header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(28px, 4vw, 46px);
+      font-weight: 900; color: var(--dark); line-height: 1.15;
+      margin-bottom: 14px; position: relative; padding-bottom: 18px;
+    }
+    .upload-header h1::after {
+      content: ''; position: absolute; bottom: 0; left: 0;
+      width: 64px; height: 3px;
+      background: var(--terracotta); border-radius: 2px;
+    }
+    .upload-header p { color: var(--mid-brown); font-size: 15px; line-height: 1.7; }
+
+    /* Form card */
+    .upload-form-card {
+      background: var(--card); border-radius: var(--radius);
+      padding: 36px; box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border);
+    }
+
+    /* Section labels */
+    .form-section-label {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px; font-weight: 700; color: var(--dark);
+      border-bottom: 2px solid var(--amber);
+      padding-bottom: 8px; margin: 28px 0 18px;
+    }
+    .form-section-label:first-child { margin-top: 0; }
+
+    /* Inputs */
+    .field-group { margin-bottom: 16px; }
+    .field-group label {
+      display: block; font-size: 13px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 1px;
+      color: var(--terracotta); margin-bottom: 6px;
+    }
+    .field-group input,
+    .field-group select,
+    .field-group textarea {
+      width: 100%; padding: 12px 16px;
+      border: 2px solid var(--border); border-radius: var(--radius-sm);
+      background: var(--input-bg); font-family: 'DM Sans', sans-serif;
+      font-size: 15px; color: var(--dark); outline: none;
+      transition: border-color 0.2s; resize: vertical;
+    }
+    .field-group input:focus,
+    .field-group select:focus,
+    .field-group textarea:focus { border-color: var(--terracotta); }
+    .field-group input::placeholder,
+    .field-group textarea::placeholder { color: var(--mid-brown); }
+    .field-group textarea { min-height: 90px; }
+
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+    /* Image upload */
+    .img-upload-zone {
+      border: 2px dashed var(--amber); border-radius: var(--radius);
+      padding: 36px 24px; text-align: center; cursor: pointer;
+      transition: all 0.25s; background: var(--warm-white);
+      position: relative;
+    }
+    .img-upload-zone:hover,
+    .img-upload-zone.drag-over { border-color: var(--terracotta); background: rgba(196,85,58,0.04); }
+    .img-upload-zone input[type="file"] {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      opacity: 0; cursor: pointer; border: none; padding: 0;
+    }
+    .img-upload-icon { font-size: 40px; margin-bottom: 10px; }
+    .img-upload-zone p { color: var(--mid-brown); font-size: 14px; margin: 0; }
+    .img-upload-zone strong { color: var(--terracotta); }
+    .img-preview-wrap { margin-top: 14px; display: none; }
+    .img-preview-wrap img {
+      width: 100%; max-height: 260px; object-fit: cover;
+      border-radius: var(--radius-sm); border: 2px solid var(--border);
+    }
+    .img-filename {
+      display: flex; align-items: center; gap: 8px; margin-top: 8px;
+      font-size: 13px; color: var(--mid-brown); font-weight: 500;
+    }
+    .img-filename .img-ok { color: var(--sage); font-size: 16px; }
+    .img-saved-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(122,158,126,0.12); color: var(--sage);
+      border: 1px solid var(--sage); border-radius: 100px;
+      padding: 4px 12px; font-size: 12px; font-weight: 700;
+      margin-top: 8px;
+    }
+
+    /* Dynamic list fields */
+    .dynamic-list { display: flex; flex-direction: column; gap: 8px; }
+    .dynamic-row {
+      display: flex; gap: 8px; align-items: center;
+    }
+    .dynamic-row input {
+      flex: 1; padding: 10px 14px;
+      border: 2px solid var(--border); border-radius: var(--radius-sm);
+      background: var(--input-bg); font-family: 'DM Sans', sans-serif;
+      font-size: 14px; color: var(--dark); outline: none;
+      transition: border-color 0.2s;
+    }
+    .dynamic-row input:focus { border-color: var(--terracotta); }
+    .btn-remove-row {
+      width: 32px; height: 32px; border-radius: 50%;
+      border: 2px solid var(--border); background: var(--warm-white);
+      color: var(--terracotta); cursor: pointer; font-size: 16px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; transition: all 0.2s; line-height: 1;
+    }
+    .btn-remove-row:hover { background: var(--terracotta); color: white; border-color: var(--terracotta); }
+    .btn-add-row {
+      display: inline-flex; align-items: center; gap: 6px;
+      margin-top: 6px; font-size: 13px; font-weight: 700;
+      color: var(--terracotta); background: none; border: 2px dashed var(--amber);
+      border-radius: var(--radius-sm); padding: 8px 14px; cursor: pointer;
+      transition: all 0.2s; font-family: 'DM Sans', sans-serif;
+    }
+    .btn-add-row:hover { background: rgba(232,146,58,0.08); }
+
+    /* Submit */
+    .submit-row {
+      display: flex; gap: 12px; margin-top: 32px; flex-wrap: wrap;
+    }
+    .btn-submit-upload {
+      flex: 1; padding: 15px 28px;
+      background: var(--terracotta); color: white;
+      border: none; border-radius: 100px;
+      font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 700;
+      cursor: pointer; transition: all 0.25s; min-width: 180px;
+    }
+    .btn-submit-upload:hover { background: var(--rust); transform: translateY(-2px); }
+    .btn-submit-upload:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+    /* Success screen */
+    .upload-success {
+      display: none; text-align: center; padding: 60px 24px;
+    }
+    .upload-success .success-icon { font-size: 72px; margin-bottom: 16px; }
+    .upload-success h2 {
+      font-family: 'Playfair Display', serif; font-size: 32px;
+      font-weight: 800; color: var(--dark); margin-bottom: 12px;
+    }
+    .upload-success p { color: var(--mid-brown); font-size: 15px; margin-bottom: 28px; }
+
+    /* Char counter */
+    .char-hint { font-size: 12px; color: var(--mid-brown); margin-top: 4px; text-align: right; }
+
+    @media (max-width: 600px) {
+      .two-col { grid-template-columns: 1fr; }
+      .upload-nav { padding: 0 16px; }
+      .upload-form-card { padding: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── NAV ────────────────────────────────────────────────── -->
+  <nav class="upload-nav">
+    <a href="home.html" class="back-btn">← Back to Recipes</a>
+    <span class="recipe-nav-title">Upload a Recipe</span>
+    <div class="nav-actions-right">
+      <button class="dark-toggle" aria-label="Toggle dark mode"></button>
+    </div>
+  </nav>
+
+  <div class="upload-wrapper">
+
+    <!-- Header -->
+    <div class="upload-header">
+      <span class="recipe-category">📤 Share</span>
+      <h1>Upload Your Recipe</h1>
+      <p>Share your culinary creation with the Al-Tabikh community. Fill in the details below — your recipe and image will be saved and displayed on the home page instantly.</p>
+    </div>
+
+    <!-- Form -->
+    <div class="upload-form-card" id="upload-form-card">
+      <form id="upload-form" novalidate>
+
+        <!-- ── RECIPE INFO ─────────────────────────────── -->
+        <div class="form-section-label">📋 Recipe Information</div>
+
+        <div class="field-group">
+          <label>Recipe Title *</label>
+          <input type="text" id="recipe-title" placeholder="e.g. Spicy Lamb Meatballs" maxlength="80" required>
+          <div class="char-hint"><span id="title-count">0</span>/80</div>
+        </div>
+
+        <div class="field-group">
+          <label>Short Description *</label>
+          <textarea id="recipe-desc" placeholder="A 1–2 sentence mouth-watering description of your dish…" maxlength="200" required></textarea>
+          <div class="char-hint"><span id="desc-count">0</span>/200</div>
+        </div>
+
+        <div class="two-col">
+          <div class="field-group">
+            <label>Category *</label>
+            <select id="recipe-cat" required>
+              <option value="">Select category…</option>
+              <option value="seafood">🐟 Seafood</option>
+              <option value="chicken">🍗 Chicken / Meat</option>
+              <option value="pasta">🍝 Pasta / Rice</option>
+              <option value="dessert">🍰 Dessert</option>
+              <option value="vegan">🥗 Vegan / Vegetarian</option>
+              <option value="drinks">☕ Drinks</option>
+            </select>
+          </div>
+          <div class="field-group">
+            <label>Your Name *</label>
+            <input type="text" id="author-name" placeholder="e.g. Layla M." maxlength="50" required>
+          </div>
+        </div>
+
+        <div class="two-col">
+          <div class="field-group">
+            <label>Prep Time</label>
+            <input type="text" id="prep-time" placeholder="e.g. 15 min">
+          </div>
+          <div class="field-group">
+            <label>Cook Time</label>
+            <input type="text" id="cook-time-input" placeholder="e.g. 45 min">
+          </div>
+        </div>
+
+        <div class="two-col">
+          <div class="field-group">
+            <label>Total Time</label>
+            <input type="text" id="total-time" placeholder="e.g. 1 hr">
+          </div>
+          <div class="field-group">
+            <label>Servings</label>
+            <input type="number" id="servings" placeholder="4" min="1" max="50">
+          </div>
+        </div>
+
+        <!-- ── IMAGE UPLOAD ────────────────────────────── -->
+        <div class="form-section-label">📸 Recipe Photo</div>
+        <p style="font-size:13px;color:var(--mid-brown);margin-bottom:14px;">Your photo is saved securely in the browser's image store and shown on the home page and recipe card.</p>
+
+        <div class="img-upload-zone" id="img-zone">
+          <input type="file" id="recipe-img" accept="image/jpeg,image/png,image/webp,image/gif">
+          <div class="img-upload-icon">🖼️</div>
+          <p><strong>Click to upload</strong> or drag & drop your photo here</p>
+          <p style="margin-top:6px;font-size:12px;">JPEG, PNG, WebP up to 10 MB</p>
+        </div>
+        <div class="img-preview-wrap" id="img-preview-wrap">
+          <img id="img-preview" src="" alt="Recipe preview">
+          <div class="img-filename">
+            <span class="img-ok">✅</span>
+            <span id="img-fname">—</span>
+          </div>
+          <div class="img-saved-badge">💾 Saved to image store</div>
+        </div>
+
+        <!-- ── INGREDIENTS ────────────────────────────── -->
+        <div class="form-section-label">🧂 Ingredients</div>
+        <div class="dynamic-list" id="ingredients-list">
+          <div class="dynamic-row">
+            <input type="text" placeholder="e.g. 2 cups all-purpose flour">
+            <button type="button" class="btn-remove-row" title="Remove">×</button>
+          </div>
+          <div class="dynamic-row">
+            <input type="text" placeholder="e.g. 3 garlic cloves, minced">
+            <button type="button" class="btn-remove-row" title="Remove">×</button>
+          </div>
+        </div>
+        <button type="button" class="btn-add-row" id="add-ingredient">+ Add Ingredient</button>
+
+        <!-- ── INSTRUCTIONS ───────────────────────────── -->
+        <div class="form-section-label">📝 Instructions</div>
+        <div class="dynamic-list" id="steps-list">
+          <div class="dynamic-row">
+            <input type="text" placeholder="Step 1: Preheat oven to…">
+            <button type="button" class="btn-remove-row" title="Remove">×</button>
+          </div>
+          <div class="dynamic-row">
+            <input type="text" placeholder="Step 2: Mix together…">
+            <button type="button" class="btn-remove-row" title="Remove">×</button>
+          </div>
+        </div>
+        <button type="button" class="btn-add-row" id="add-step">+ Add Step</button>
+
+        <!-- ── TIPS ───────────────────────────────────── -->
+        <div class="form-section-label">💡 Chef's Tips (optional)</div>
+        <div class="dynamic-list" id="tips-list">
+          <div class="dynamic-row">
+            <input type="text" placeholder="e.g. Use room-temperature butter for a fluffier texture…">
+            <button type="button" class="btn-remove-row" title="Remove">×</button>
+          </div>
+        </div>
+        <button type="button" class="btn-add-row" id="add-tip">+ Add Tip</button>
+
+        <!-- ── SUBMIT ──────────────────────────────────── -->
+        <div class="submit-row">
+          <button type="submit" class="btn-submit-upload" id="submit-btn">🚀 Publish Recipe</button>
+          <a href="home.html" class="back-btn" style="padding:15px 24px;">Cancel</a>
+        </div>
+
+      </form>
+    </div>
+
+    <!-- Success screen -->
+    <div class="upload-success" id="upload-success">
+      <div class="success-icon">🎉</div>
+      <h2>Recipe Published!</h2>
+      <p>Your recipe has been saved and is now live on the Al-Tabikh home page. Thank you for contributing to our community kitchen!</p>
+      <a href="home.html" class="btn">← View on Home Page</a>
+      <div style="margin-top:16px;">
+        <button class="back-btn" id="upload-another">+ Upload Another Recipe</button>
+      </div>
+    </div>
+
+  </div>
+
+  <div id="toast" class="toast"></div>
+
+  <script>
+  // ── Dark mode ─────────────────────────────────────────────────────────────
+  const root = document.documentElement;
+  const saved = localStorage.getItem('altabikh-theme');
+  if (saved) root.setAttribute('data-theme', saved);
+  document.querySelector('.dark-toggle').addEventListener('click', () => {
+    const t = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', t);
+    localStorage.setItem('altabikh-theme', t);
+  });
+
+  // ── Toast helper ─────────────────────────────────────────────────────────
+  function toast(msg, type = 'success') {
+    const el = document.getElementById('toast');
+    el.textContent = msg;
+    el.className = `toast show ${type}`;
+    setTimeout(() => el.className = 'toast', 3200);
+  }
+
+  // ── Char counters ─────────────────────────────────────────────────────────
+  document.getElementById('recipe-title').addEventListener('input', function() {
+    document.getElementById('title-count').textContent = this.value.length;
+  });
+  document.getElementById('recipe-desc').addEventListener('input', function() {
+    document.getElementById('desc-count').textContent = this.value.length;
+  });
+
+  // ── Dynamic list helpers ──────────────────────────────────────────────────
+  function addRow(listId, placeholder) {
+    const list = document.getElementById(listId);
+    const row = document.createElement('div');
+    row.className = 'dynamic-row';
+    row.innerHTML = `<input type="text" placeholder="${placeholder}">
+                     <button type="button" class="btn-remove-row" title="Remove">×</button>`;
+    list.appendChild(row);
+    row.querySelector('input').focus();
+    bindRemove(row.querySelector('.btn-remove-row'), list);
+  }
+
+  function bindRemove(btn, list) {
+    btn.addEventListener('click', () => {
+      if (list.querySelectorAll('.dynamic-row').length > 1) {
+        btn.closest('.dynamic-row').remove();
+      } else {
+        toast('⚠️ At least one entry is required.', 'error');
+      }
+    });
+  }
+
+  function bindAllRemoveButtons(listId) {
+    document.querySelectorAll(`#${listId} .btn-remove-row`).forEach(btn => {
+      bindRemove(btn, document.getElementById(listId));
+    });
+  }
+  bindAllRemoveButtons('ingredients-list');
+  bindAllRemoveButtons('steps-list');
+  bindAllRemoveButtons('tips-list');
+
+  document.getElementById('add-ingredient').addEventListener('click', () =>
+    addRow('ingredients-list', 'e.g. 1 cup milk'));
+  document.getElementById('add-step').addEventListener('click', () =>
+    addRow('steps-list', 'Next step…'));
+  document.getElementById('add-tip').addEventListener('click', () =>
+    addRow('tips-list', 'Helpful tip…'));
+
+  // ── Image upload & preview + base64 storage ───────────────────────────────
+  let imageBase64 = null;
+  let imageFileName = null;
+
+  const imgInput = document.getElementById('recipe-img');
+  const imgZone  = document.getElementById('img-zone');
+  const imgPreviewWrap = document.getElementById('img-preview-wrap');
+  const imgPreview = document.getElementById('img-preview');
+  const imgFname   = document.getElementById('img-fname');
+
+  // Drag and drop
+  imgZone.addEventListener('dragover', e => { e.preventDefault(); imgZone.classList.add('drag-over'); });
+  imgZone.addEventListener('dragleave', () => imgZone.classList.remove('drag-over'));
+  imgZone.addEventListener('drop', e => {
+    e.preventDefault();
+    imgZone.classList.remove('drag-over');
+    const file = e.dataTransfer.files[0];
+    if (file) processImage(file);
+  });
+
+  imgInput.addEventListener('change', () => {
+    if (imgInput.files[0]) processImage(imgInput.files[0]);
+  });
+
+  function processImage(file) {
+    if (!file.type.startsWith('image/')) {
+      toast('❌ Please upload a valid image file.', 'error');
+      return;
+    }
+    if (file.size > 10 * 1024 * 1024) {
+      toast('❌ Image must be under 10 MB.', 'error');
+      return;
+    }
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      imageBase64 = e.target.result; // full base64 data URL
+      imageFileName = file.name;
+
+      // Show preview
+      imgPreview.src = imageBase64;
+      imgFname.textContent = file.name + ' (' + (file.size / 1024).toFixed(0) + ' KB)';
+      imgPreviewWrap.style.display = 'block';
+      imgZone.style.borderColor = 'var(--sage)';
+
+      // Save to localStorage image store (keyed by filename)
+      try {
+        const imgStore = JSON.parse(localStorage.getItem('altabikh-images') || '{}');
+        imgStore[file.name] = imageBase64;
+        localStorage.setItem('altabikh-images', JSON.stringify(imgStore));
+        toast('✅ Image saved to image store!');
+      } catch(err) {
+        toast('⚠️ Image too large for local storage. It will be shown in this session only.', 'error');
+      }
+    };
+    reader.readAsDataURL(file);
+  }
+
+  // ── Form validation & submit ──────────────────────────────────────────────
+  document.getElementById('upload-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const title   = document.getElementById('recipe-title').value.trim();
+    const desc    = document.getElementById('recipe-desc').value.trim();
+    const cat     = document.getElementById('recipe-cat').value;
+    const author  = document.getElementById('author-name').value.trim();
+
+    if (!title || !desc || !cat || !author) {
+      toast('❌ Please fill in all required fields.', 'error');
+      return;
+    }
+
+    // Collect ingredients
+    const ingredients = [...document.querySelectorAll('#ingredients-list input')]
+      .map(i => i.value.trim()).filter(Boolean);
+    // Collect steps
+    const steps = [...document.querySelectorAll('#steps-list input')]
+      .map(i => i.value.trim()).filter(Boolean);
+    // Collect tips
+    const tips = [...document.querySelectorAll('#tips-list input')]
+      .map(i => i.value.trim()).filter(Boolean);
+
+    if (ingredients.length === 0) { toast('❌ Add at least one ingredient.', 'error'); return; }
+    if (steps.length === 0) { toast('❌ Add at least one instruction step.', 'error'); return; }
+
+    const prep     = document.getElementById('prep-time').value.trim() || '—';
+    const cook     = document.getElementById('cook-time-input').value.trim() || '—';
+    const total    = document.getElementById('total-time').value.trim() || '—';
+    const servings = document.getElementById('servings').value || '4';
+
+    // Build recipe object
+    const recipe = {
+      id: 'community-' + Date.now(),
+      title,
+      desc,
+      category: cat,
+      author,
+      prep, cook, total, servings,
+      ingredients, steps, tips,
+      image: imageBase64 || null,
+      imageName: imageFileName || null,
+      date: new Date().toLocaleDateString('en-GB', { year:'numeric', month:'short', day:'numeric' }),
+    };
+
+    // Save to community recipes
+    try {
+      const list = JSON.parse(localStorage.getItem('altabikh-community') || '[]');
+      list.unshift(recipe); // newest first
+      localStorage.setItem('altabikh-community', JSON.stringify(list));
+    } catch(err) {
+      toast('❌ Error saving recipe. Try reducing image size.', 'error');
+      return;
+    }
+
+    // Show success
+    const submitBtn = document.getElementById('submit-btn');
+    submitBtn.disabled = true;
+    submitBtn.textContent = '✅ Published!';
+
+    document.getElementById('upload-form-card').style.display = 'none';
+    document.getElementById('upload-success').style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  // Upload another
+  document.getElementById('upload-another').addEventListener('click', () => {
+    document.getElementById('upload-form').reset();
+    imageBase64 = null;
+    imageFileName = null;
+    imgPreviewWrap.style.display = 'none';
+    imgZone.style.borderColor = '';
+    document.getElementById('title-count').textContent = '0';
+    document.getElementById('desc-count').textContent = '0';
+    document.getElementById('upload-form-card').style.display = 'block';
+    document.getElementById('upload-success').style.display = 'none';
+    document.getElementById('submit-btn').disabled = false;
+    document.getElementById('submit-btn').textContent = '🚀 Publish Recipe';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+  </script>
+</body>
+</html>

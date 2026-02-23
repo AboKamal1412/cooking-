@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mango Lassi — Al-Tabikh</title>
+  <link rel="stylesheet" href="../CSS/styles2.css">
+</head>
+<body data-recipe="mango-lassi">
+  <nav class="recipe-nav">
+    <a href="home.html" class="back-btn">← Back to Recipes</a>
+    <span class="recipe-nav-title">Mango Lassi</span>
+    <div class="nav-actions-right">
+      <button class="save-recipe-btn" data-id="mango-lassi">🤍 Save</button>
+      <button class="dark-toggle" aria-label="Toggle dark mode"></button>
+    </div>
+  </nav>
+  <div class="recipe-wrapper">
+    <div class="recipe-header">
+      <span class="recipe-category">☕ Drinks</span>
+      <h1>Mango Lassi</h1>
+      <div class="recipe-intro-text">The refreshing Indian yogurt-mango drink — thick, fragrant, and beautifully cooling. A perfect accompaniment to spicy food or as a summer treat on its own.</div>
+    </div>
+    <img src="../image/Mango Lassi.jpg" alt="Mango Lassi" class="recipe-hero-img"
+      onerror="this.src='https://images.unsplash.com/photo-1626200419199-391ae4be7a41?w=800&q=80'">
+    <div class="recipe-meta">
+      <div><strong>Prep Time</strong><span class="value">5 min</span></div>
+      <div><strong>Cook Time</strong><span class="value" id="cook-time-value">0</span></div>
+      <div><strong>Total Time</strong><span class="value">5 min</span></div>
+      <div>
+        <strong>Servings</strong>
+        <select id="serving-size" class="serving-select">
+          <option value="2">2 servings</option>
+          <option value="4" >4 servings</option>
+          <option value="6" >6 servings</option>
+          <option value="8" >8 servings</option>
+        </select>
+      </div>
+    </div>
+    <div class="cooking-timer">
+      <h3>⏱ Cooking Timer</h3>
+      <div class="timer-display" id="timer-display">--:--</div>
+      <div class="timer-controls">
+        <button id="start-timer" class="timer-btn timer-btn-start">Start</button>
+        <button id="reset-timer" class="timer-btn timer-btn-reset">Reset</button>
+      </div>
+    </div>
+    <div class="recipe-section">
+      <h2 class="recipe-section-title">Ingredients</h2>
+      <ul class="ingredients-list">
+<li><div class="ingredient-check">✓</div><span>2 ripe mangoes, peeled and cubed (or 400g canned mango pulp)</span></li>
+<li><div class="ingredient-check">✓</div><span>1 cup (250g) plain full-fat yogurt</span></li>
+<li><div class="ingredient-check">✓</div><span>½ cup (120ml) cold whole milk</span></li>
+<li><div class="ingredient-check">✓</div><span>3 tbsp caster sugar (or to taste)</span></li>
+<li><div class="ingredient-check">✓</div><span>½ tsp ground cardamom</span></li>
+<li><div class="ingredient-check">✓</div><span>Pinch of salt</span></li>
+<li><div class="ingredient-check">✓</div><span>Ice cubes</span></li>
+<li><div class="ingredient-check">✓</div><span>Pinch of saffron to garnish (optional)</span></li>
+      </ul>
+    </div>
+    <div class="recipe-section">
+      <h2 class="recipe-section-title">Instructions</h2>
+      <ol class="instructions-list">
+<li><div class="step-num">1</div><span>Add mango, yogurt, milk, sugar, and cardamom to a blender.</span></li>
+<li><div class="step-num">2</div><span>Blend on high for 1 minute until completely smooth.</span></li>
+<li><div class="step-num">3</div><span>Taste and adjust sweetness. Add a handful of ice cubes.</span></li>
+<li><div class="step-num">4</div><span>Blend again until frothy and thick.</span></li>
+<li><div class="step-num">5</div><span>Pour into tall glasses. Garnish with a pinch of cardamom or a few saffron strands.</span></li>
+      </ol>
+    </div>
+    <div class="recipe-section">
+      <h2 class="recipe-section-title">Chef's Tips</h2>
+      <div class="tips-box"><ul>
+<li>Fresh Alphonso mangoes in season are incomparable — use them if you can find them.</li>
+<li>Freeze mango chunks beforehand for an extra-thick, extra-cold lassi without watery ice.</li>
+<li>Use full-fat yogurt for the creamiest, most satisfying texture.</li>
+      </ul></div>
+    </div>
+    <div class="recipe-section">
+      <h2 class="recipe-section-title">Serving Suggestions</h2>
+      <ul class="serving-list">
+<li>Samosas</li>
+<li>Biryani</li>
+<li>Garlic naan and curry</li>
+<li>Indian sweets (gulab jamun)</li>
+      </ul>
+    </div>
+    <div class="recipe-section reviews-section">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:12px;">
+        <h2 class="recipe-section-title" style="margin-bottom:0;border-bottom:none;padding-bottom:0;">Reviews</h2>
+        <button class="write-review-btn">✏️ Write a Review</button>
+      </div>
+      <div class="reviews-summary">
+        <div>
+          <div class="avg-rating-big">—</div>
+          <div class="avg-stars">☆☆☆☆☆</div>
+          <div class="avg-count">No reviews yet</div>
+        </div>
+        <div class="rating-bars">
+          <div class="rating-bar-row"><span>5</span><div class="bar-track"><div class="bar-fill" id="bar-5" style="width:0%"></div></div></div>
+          <div class="rating-bar-row"><span>4</span><div class="bar-track"><div class="bar-fill" id="bar-4" style="width:0%"></div></div></div>
+          <div class="rating-bar-row"><span>3</span><div class="bar-track"><div class="bar-fill" id="bar-3" style="width:0%"></div></div></div>
+          <div class="rating-bar-row"><span>2</span><div class="bar-track"><div class="bar-fill" id="bar-2" style="width:0%"></div></div></div>
+          <div class="rating-bar-row"><span>1</span><div class="bar-track"><div class="bar-fill" id="bar-1" style="width:0%"></div></div></div>
+        </div>
+      </div>
+      <div class="review-form">
+        <h4>Share Your Experience</h4>
+        <div class="star-picker">
+          <span class="star-pick">⭐</span><span class="star-pick">⭐</span>
+          <span class="star-pick">⭐</span><span class="star-pick">⭐</span><span class="star-pick">⭐</span>
+        </div>
+        <div class="form-row">
+          <input type="text" id="reviewer-name" placeholder="Your name *">
+          <input type="email" placeholder="Email (optional)">
+        </div>
+        <textarea id="review-text" placeholder="Tell us what you thought of this recipe…"></textarea>
+        <button class="submit-review-btn">Submit Review</button>
+      </div>
+      <div class="reviews-list"></div>
+    </div>
+  </div>
+  <div id="toast" class="toast"></div>
+  <script src="../javascript/script2.js"></script>
+</body>
+</html>

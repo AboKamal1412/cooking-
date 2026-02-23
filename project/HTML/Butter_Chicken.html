@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Butter Chicken (Murgh Makhani) — Al-Tabikh</title>
+  <link rel="stylesheet" href="../CSS/styles2.css">
+</head>
+<body data-recipe="butter-chicken">
+  <nav class="recipe-nav">
+    <a href="home.html" class="back-btn">← Back to Recipes</a>
+    <span class="recipe-nav-title">Butter Chicken (Murgh Makhani)</span>
+    <div class="nav-actions-right">
+      <button class="save-recipe-btn" data-id="butter-chicken">🤍 Save</button>
+      <button class="dark-toggle" aria-label="Toggle dark mode"></button>
+    </div>
+  </nav>
+  <div class="recipe-wrapper">
+    <div class="recipe-header">
+      <span class="recipe-category">🍗 Chicken</span>
+      <h1>Butter Chicken (Murgh Makhani)</h1>
+      <div class="recipe-intro-text">Silky, rich tomato-cream sauce cradling tender marinated chicken. The world's most beloved Indian dish — and now yours to make at home.</div>
+    </div>
+    <img src="../image/Butter Chicken.jpg" alt="Butter Chicken (Murgh Makhani)" class="recipe-hero-img"
+      onerror="this.src='https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?w=800&q=80'">
+    <div class="recipe-meta">
+      <div><strong>Prep Time</strong><span class="value">15 min + marinating</span></div>
+      <div><strong>Cook Time</strong><span class="value" id="cook-time-value">2700</span></div>
+      <div><strong>Total Time</strong><span class="value">1 hr</span></div>
+      <div>
+        <strong>Servings</strong>
+        <select id="serving-size" class="serving-select">
+          <option value="2">2 servings</option>
+          <option value="4" selected>4 servings</option>
+          <option value="6" >6 servings</option>
+          <option value="8" >8 servings</option>
+        </select>
+      </div>
+    </div>
+    <div class="cooking-timer">
+      <h3>⏱ Cooking Timer</h3>
+      <div class="timer-display" id="timer-display">--:--</div>
+      <div class="timer-controls">
+        <button id="start-timer" class="timer-btn timer-btn-start">Start</button>
+        <button id="reset-timer" class="timer-btn timer-btn-reset">Reset</button>
+      </div>
+    </div>
+    <div class="recipe-section">
+      <h2 class="recipe-section-title">Ingredients</h2>
+      <ul class="ingredients-list">
+<li><div class="ingredient-check">✓</div><span>600g boneless chicken thighs, cubed</span></li>
+<li><div class="ingredient-check">✓</div><span>1 cup plain yogurt</span></li>
+<li><div class="ingredient-check">✓</div><span>2 tsp tandoori masala or garam masala</span></li>
+<li><div class="ingredient-check">✓</div><span>400g crushed tomatoes</span></li>
+<li><div class="ingredient-check">✓</div><span>1 onion, roughly chopped</span></li>
+<li><div class="ingredient-check">✓</div><span>3 garlic cloves</span></li>
+<li><div class="ingredient-check">✓</div><span>1-inch fresh ginger</span></li>
+<li><div class="ingredient-check">✓</div><span>½ cup heavy cream</span></li>
+<li><div class="ingredient-check">✓</div><span>2 tbsp butter</span></li>
+<li><div class="ingredient-check">✓</div><span>1 tsp sugar</span></li>
+<li><div class="ingredient-check">✓</div><span>Salt to taste</span></li>
+      </ul>
+    </div>
+    <div class="recipe-section">
+      <h2 class="recipe-section-title">Instructions</h2>
+      <ol class="instructions-list">
+<li><div class="step-num">1</div><span>Marinate chicken in yogurt and tandoori masala for at least 1 hour (overnight is best).</span></li>
+<li><div class="step-num">2</div><span>Cook marinated chicken in a hot, oiled pan until charred at the edges. Set aside.</span></li>
+<li><div class="step-num">3</div><span>In the same pan, sauté onion, garlic, and ginger in butter until deep golden.</span></li>
+<li><div class="step-num">4</div><span>Add crushed tomatoes and simmer 15 minutes. Blend the sauce until silky smooth.</span></li>
+<li><div class="step-num">5</div><span>Return blended sauce to pan. Stir in cream, sugar, and salt.</span></li>
+<li><div class="step-num">6</div><span>Add charred chicken. Simmer 10 minutes. Finish with a knob of cold butter for gloss.</span></li>
+      </ol>
+    </div>
+    <div class="recipe-section">
+      <h2 class="recipe-section-title">Chef's Tips</h2>
+      <div class="tips-box"><ul>
+<li>Blending the sauce is the secret to that restaurant-smooth texture.</li>
+<li>Charring the chicken before adding to the sauce adds complexity.</li>
+<li>Crush dried fenugreek (kasuri methi) over the dish at the end — it is transformative.</li>
+      </ul></div>
+    </div>
+    <div class="recipe-section">
+      <h2 class="recipe-section-title">Serving Suggestions</h2>
+      <ul class="serving-list">
+<li>Fluffy basmati rice</li>
+<li>Garlic naan</li>
+<li>Cucumber raita</li>
+<li>Mango lassi</li>
+      </ul>
+    </div>
+    <div class="recipe-section reviews-section">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:12px;">
+        <h2 class="recipe-section-title" style="margin-bottom:0;border-bottom:none;padding-bottom:0;">Reviews</h2>
+        <button class="write-review-btn">✏️ Write a Review</button>
+      </div>
+      <div class="reviews-summary">
+        <div>
+          <div class="avg-rating-big">—</div>
+          <div class="avg-stars">☆☆☆☆☆</div>
+          <div class="avg-count">No reviews yet</div>
+        </div>
+        <div class="rating-bars">
+          <div class="rating-bar-row"><span>5</span><div class="bar-track"><div class="bar-fill" id="bar-5" style="width:0%"></div></div></div>
+          <div class="rating-bar-row"><span>4</span><div class="bar-track"><div class="bar-fill" id="bar-4" style="width:0%"></div></div></div>
+          <div class="rating-bar-row"><span>3</span><div class="bar-track"><div class="bar-fill" id="bar-3" style="width:0%"></div></div></div>
+          <div class="rating-bar-row"><span>2</span><div class="bar-track"><div class="bar-fill" id="bar-2" style="width:0%"></div></div></div>
+          <div class="rating-bar-row"><span>1</span><div class="bar-track"><div class="bar-fill" id="bar-1" style="width:0%"></div></div></div>
+        </div>
+      </div>
+      <div class="review-form">
+        <h4>Share Your Experience</h4>
+        <div class="star-picker">
+          <span class="star-pick">⭐</span><span class="star-pick">⭐</span>
+          <span class="star-pick">⭐</span><span class="star-pick">⭐</span><span class="star-pick">⭐</span>
+        </div>
+        <div class="form-row">
+          <input type="text" id="reviewer-name" placeholder="Your name *">
+          <input type="email" placeholder="Email (optional)">
+        </div>
+        <textarea id="review-text" placeholder="Tell us what you thought of this recipe…"></textarea>
+        <button class="submit-review-btn">Submit Review</button>
+      </div>
+      <div class="reviews-list"></div>
+    </div>
+  </div>
+  <div id="toast" class="toast"></div>
+  <script src="../javascript/script2.js"></script>
+</body>
+</html>

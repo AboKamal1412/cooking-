@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spaghetti Carbonara — Al-Tabikh</title>
+  <link rel="stylesheet" href="../CSS/styles2.css">
+</head>
+<body data-recipe="spaghetti-carbonara">
+  <nav class="recipe-nav">
+    <a href="home.html" class="back-btn">← Back to Recipes</a>
+    <span class="recipe-nav-title">Spaghetti Carbonara</span>
+    <div class="nav-actions-right">
+      <button class="save-recipe-btn" data-id="spaghetti-carbonara">🤍 Save</button>
+      <button class="dark-toggle" aria-label="Toggle dark mode"></button>
+    </div>
+  </nav>
+  <div class="recipe-wrapper">
+    <div class="recipe-header">
+      <span class="recipe-category">🍝 Pasta</span>
+      <h1>Spaghetti Carbonara</h1>
+      <div class="recipe-intro-text">The Roman classic — silky egg and Pecorino sauce clinging to spaghetti with crispy guanciale. No cream, no shortcuts, just perfection.</div>
+    </div>
+    <img src="../image/Spaghetti Carbonara.jpg" alt="Spaghetti Carbonara" class="recipe-hero-img"
+      onerror="this.src='https://images.unsplash.com/photo-1612874742237-6526221588e3?w=800&q=80'">
+    <div class="recipe-meta">
+      <div><strong>Prep Time</strong><span class="value">5 min</span></div>
+      <div><strong>Cook Time</strong><span class="value" id="cook-time-value">1200</span></div>
+      <div><strong>Total Time</strong><span class="value">25 min</span></div>
+      <div>
+        <strong>Servings</strong>
+        <select id="serving-size" class="serving-select">
+          <option value="2">2 servings</option>
+          <option value="4" selected>4 servings</option>
+          <option value="6" >6 servings</option>
+          <option value="8" >8 servings</option>
+        </select>
+      </div>
+    </div>
+    <div class="cooking-timer">
+      <h3>⏱ Cooking Timer</h3>
+      <div class="timer-display" id="timer-display">--:--</div>
+      <div class="timer-controls">
+        <button id="start-timer" class="timer-btn timer-btn-start">Start</button>
+        <button id="reset-timer" class="timer-btn timer-btn-reset">Reset</button>
+      </div>
+    </div>
+    <div class="recipe-section">
+      <h2 class="recipe-section-title">Ingredients</h2>
+      <ul class="ingredients-list">
+<li><div class="ingredient-check">✓</div><span>400g spaghetti</span></li>
+<li><div class="ingredient-check">✓</div><span>200g guanciale or pancetta, cubed</span></li>
+<li><div class="ingredient-check">✓</div><span>4 egg yolks + 1 whole egg</span></li>
+<li><div class="ingredient-check">✓</div><span>80g Pecorino Romano, finely grated</span></li>
+<li><div class="ingredient-check">✓</div><span>60g Parmesan, finely grated</span></li>
+<li><div class="ingredient-check">✓</div><span>Generous amount of black pepper</span></li>
+<li><div class="ingredient-check">✓</div><span>Salt for pasta water</span></li>
+      </ul>
+    </div>
+    <div class="recipe-section">
+      <h2 class="recipe-section-title">Instructions</h2>
+      <ol class="instructions-list">
+<li><div class="step-num">1</div><span>Cook pasta in a large pot of heavily salted boiling water until al dente. Reserve 1 cup pasta water.</span></li>
+<li><div class="step-num">2</div><span>Meanwhile, cook guanciale in a cold pan over medium heat until golden and crispy. Remove from heat.</span></li>
+<li><div class="step-num">3</div><span>Whisk egg yolks, whole egg, Pecorino, Parmesan, and generous black pepper together in a bowl.</span></li>
+<li><div class="step-num">4</div><span>Add hot drained pasta to the guanciale pan (off heat). Toss to coat in the fat.</span></li>
+<li><div class="step-num">5</div><span>Pour egg mixture over pasta and toss vigorously, adding pasta water a splash at a time until creamy and glossy.</span></li>
+<li><div class="step-num">6</div><span>Serve immediately with extra cheese and cracked black pepper.</span></li>
+      </ol>
+    </div>
+    <div class="recipe-section">
+      <h2 class="recipe-section-title">Chef's Tips</h2>
+      <div class="tips-box"><ul>
+<li>Never return the pan to the heat once eggs are added — the residual heat is all you need.</li>
+<li>Freshly cracked coarse black pepper is non-negotiable — it is part of the dish.</li>
+<li>Pecorino Romano is more traditional and sharper than Parmesan.</li>
+      </ul></div>
+    </div>
+    <div class="recipe-section">
+      <h2 class="recipe-section-title">Serving Suggestions</h2>
+      <ul class="serving-list">
+<li>Simple arugula salad</li>
+<li>Garlic bread</li>
+<li>Glass of Frascati white wine</li>
+<li>Tiramisu to follow</li>
+      </ul>
+    </div>
+    <div class="recipe-section reviews-section">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:12px;">
+        <h2 class="recipe-section-title" style="margin-bottom:0;border-bottom:none;padding-bottom:0;">Reviews</h2>
+        <button class="write-review-btn">✏️ Write a Review</button>
+      </div>
+      <div class="reviews-summary">
+        <div>
+          <div class="avg-rating-big">—</div>
+          <div class="avg-stars">☆☆☆☆☆</div>
+          <div class="avg-count">No reviews yet</div>
+        </div>
+        <div class="rating-bars">
+          <div class="rating-bar-row"><span>5</span><div class="bar-track"><div class="bar-fill" id="bar-5" style="width:0%"></div></div></div>
+          <div class="rating-bar-row"><span>4</span><div class="bar-track"><div class="bar-fill" id="bar-4" style="width:0%"></div></div></div>
+          <div class="rating-bar-row"><span>3</span><div class="bar-track"><div class="bar-fill" id="bar-3" style="width:0%"></div></div></div>
+          <div class="rating-bar-row"><span>2</span><div class="bar-track"><div class="bar-fill" id="bar-2" style="width:0%"></div></div></div>
+          <div class="rating-bar-row"><span>1</span><div class="bar-track"><div class="bar-fill" id="bar-1" style="width:0%"></div></div></div>
+        </div>
+      </div>
+      <div class="review-form">
+        <h4>Share Your Experience</h4>
+        <div class="star-picker">
+          <span class="star-pick">⭐</span><span class="star-pick">⭐</span>
+          <span class="star-pick">⭐</span><span class="star-pick">⭐</span><span class="star-pick">⭐</span>
+        </div>
+        <div class="form-row">
+          <input type="text" id="reviewer-name" placeholder="Your name *">
+          <input type="email" placeholder="Email (optional)">
+        </div>
+        <textarea id="review-text" placeholder="Tell us what you thought of this recipe…"></textarea>
+        <button class="submit-review-btn">Submit Review</button>
+      </div>
+      <div class="reviews-list"></div>
+    </div>
+  </div>
+  <div id="toast" class="toast"></div>
+  <script src="../javascript/script2.js"></script>
+</body>
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Moist Banana Bread — Al-Tabikh</title>
+  <link rel="stylesheet" href="../CSS/styles2.css">
+</head>
+<body data-recipe="banana-bread">
+  <nav class="recipe-nav">
+    <a href="home.html" class="back-btn">← Back to Recipes</a>
+    <span class="recipe-nav-title">Moist Banana Bread</span>
+    <div class="nav-actions-right">
+      <button class="save-recipe-btn" data-id="banana-bread">🤍 Save</button>
+      <button class="dark-toggle" aria-label="Toggle dark mode"></button>
+    </div>
+  </nav>
+  <div class="recipe-wrapper">
+    <div class="recipe-header">
+      <span class="recipe-category">🍰 Dessert</span>
+      <h1>Moist Banana Bread</h1>
+      <div class="recipe-intro-text">The most comforting bake of all — rich, moist, and deeply banana-flavoured. The perfect use for your overripe bananas.</div>
+    </div>
+    <img src="../image/Banana Bread.jpg" alt="Moist Banana Bread" class="recipe-hero-img"
+      onerror="this.src='https://images.unsplash.com/photo-1509440159596-0249088772ff?w=800&q=80'">
+    <div class="recipe-meta">
+      <div><strong>Prep Time</strong><span class="value">10 min</span></div>
+      <div><strong>Cook Time</strong><span class="value" id="cook-time-value">3300</span></div>
+      <div><strong>Total Time</strong><span class="value">1 hr 5 min</span></div>
+      <div>
+        <strong>Servings</strong>
+        <select id="serving-size" class="serving-select">
+          <option value="2">2 servings</option>
+          <option value="4" >4 servings</option>
+          <option value="6" >6 servings</option>
+          <option value="8" selected>8 servings</option>
+        </select>
+      </div>
+    </div>
+    <div class="cooking-timer">
+      <h3>⏱ Cooking Timer</h3>
+      <div class="timer-display" id="timer-display">--:--</div>
+      <div class="timer-controls">
+        <button id="start-timer" class="timer-btn timer-btn-start">Start</button>
+        <button id="reset-timer" class="timer-btn timer-btn-reset">Reset</button>
+      </div>
+    </div>
+    <div class="recipe-section">
+      <h2 class="recipe-section-title">Ingredients</h2>
+      <ul class="ingredients-list">
+<li><div class="ingredient-check">✓</div><span>3 very ripe bananas, mashed</span></li>
+<li><div class="ingredient-check">✓</div><span>1½ cups (190g) all-purpose flour</span></li>
+<li><div class="ingredient-check">✓</div><span>¾ cup (150g) caster sugar</span></li>
+<li><div class="ingredient-check">✓</div><span>⅓ cup (75g) melted butter</span></li>
+<li><div class="ingredient-check">✓</div><span>1 egg, beaten</span></li>
+<li><div class="ingredient-check">✓</div><span>1 tsp baking soda</span></li>
+<li><div class="ingredient-check">✓</div><span>Pinch of salt</span></li>
+<li><div class="ingredient-check">✓</div><span>1 tsp vanilla extract</span></li>
+<li><div class="ingredient-check">✓</div><span>½ tsp ground cinnamon</span></li>
+<li><div class="ingredient-check">✓</div><span>½ cup chopped walnuts or chocolate chips (optional)</span></li>
+      </ul>
+    </div>
+    <div class="recipe-section">
+      <h2 class="recipe-section-title">Instructions</h2>
+      <ol class="instructions-list">
+<li><div class="step-num">1</div><span>Preheat oven to 175°C (350°F). Grease a 9×5 inch loaf pan and line with baking paper.</span></li>
+<li><div class="step-num">2</div><span>Mash bananas thoroughly in a large bowl until almost smooth.</span></li>
+<li><div class="step-num">3</div><span>Stir in melted butter, then sugar, beaten egg, and vanilla.</span></li>
+<li><div class="step-num">4</div><span>Sprinkle over baking soda, salt, and cinnamon. Mix well.</span></li>
+<li><div class="step-num">5</div><span>Fold in flour until just combined — a few lumps are fine. Fold in nuts or chocolate if using.</span></li>
+<li><div class="step-num">6</div><span>Pour into prepared pan. Bake 55–65 minutes until golden and a toothpick comes out clean.</span></li>
+<li><div class="step-num">7</div><span>Cool in pan 10 minutes, then turn out and cool completely on a rack.</span></li>
+      </ol>
+    </div>
+    <div class="recipe-section">
+      <h2 class="recipe-section-title">Chef's Tips</h2>
+      <div class="tips-box"><ul>
+<li>The riper and blacker the bananas, the sweeter and more flavourful the bread.</li>
+<li>Do not overmix after adding flour — it develops gluten and makes the loaf tough.</li>
+<li>Wrap cooled bread tightly — it gets even moister on day two.</li>
+      </ul></div>
+    </div>
+    <div class="recipe-section">
+      <h2 class="recipe-section-title">Serving Suggestions</h2>
+      <ul class="serving-list">
+<li>Salted butter and honey</li>
+<li>Cream cheese</li>
+<li>A cup of morning coffee</li>
+<li>Vanilla ice cream</li>
+      </ul>
+    </div>
+    <div class="recipe-section reviews-section">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:12px;">
+        <h2 class="recipe-section-title" style="margin-bottom:0;border-bottom:none;padding-bottom:0;">Reviews</h2>
+        <button class="write-review-btn">✏️ Write a Review</button>
+      </div>
+      <div class="reviews-summary">
+        <div>
+          <div class="avg-rating-big">—</div>
+          <div class="avg-stars">☆☆☆☆☆</div>
+          <div class="avg-count">No reviews yet</div>
+        </div>
+        <div class="rating-bars">
+          <div class="rating-bar-row"><span>5</span><div class="bar-track"><div class="bar-fill" id="bar-5" style="width:0%"></div></div></div>
+          <div class="rating-bar-row"><span>4</span><div class="bar-track"><div class="bar-fill" id="bar-4" style="width:0%"></div></div></div>
+          <div class="rating-bar-row"><span>3</span><div class="bar-track"><div class="bar-fill" id="bar-3" style="width:0%"></div></div></div>
+          <div class="rating-bar-row"><span>2</span><div class="bar-track"><div class="bar-fill" id="bar-2" style="width:0%"></div></div></div>
+          <div class="rating-bar-row"><span>1</span><div class="bar-track"><div class="bar-fill" id="bar-1" style="width:0%"></div></div></div>
+        </div>
+      </div>
+      <div class="review-form">
+        <h4>Share Your Experience</h4>
+        <div class="star-picker">
+          <span class="star-pick">⭐</span><span class="star-pick">⭐</span>
+          <span class="star-pick">⭐</span><span class="star-pick">⭐</span><span class="star-pick">⭐</span>
+        </div>
+        <div class="form-row">
+          <input type="text" id="reviewer-name" placeholder="Your name *">
+          <input type="email" placeholder="Email (optional)">
+        </div>
+        <textarea id="review-text" placeholder="Tell us what you thought of this recipe…"></textarea>
+        <button class="submit-review-btn">Submit Review</button>
+      </div>
+      <div class="reviews-list"></div>
+    </div>
+  </div>
+  <div id="toast" class="toast"></div>
+  <script src="../javascript/script2.js"></script>
+</body>
+</html>
