@@ -1,37 +1,5 @@
 AL-TABIKH — Redesigned Website
 =================================
-
-FOLDER STRUCTURE:
------------------
-project/
-├── HTML/
-│   ├── home.html                      ← Open this to start!
-│   ├── upload.html                    ← Submit a new recipe
-│   ├── recipe.html                    ← Auto-generated page for community recipes
-│   ├── Grilled_Salmon.html
-│   ├── Vegetable_Pasta.html
-│   ├── Chicken_Curry.html
-│   ├── Chocolate_Cake.html
-│   ├── Chocolate_Lava_Cake.html
-│   ├── Creamy_Mushroom_Risotto.html
-│   ├── Lemon_Garlic_Roast_Chicken.html
-│   ├── Tofu_Larb.html
-│   └── Vietnamese_Coffee_Smoothie.html
-│
-├── CSS/
-│   ├── styles.css                     ← Main site styles
-│   └── styles2.css                    ← Recipe page styles
-│
-├── javascript/
-│   ├── script.js                      ← Main site JS
-│   └── script2.js                     ← Recipe page JS
-│
-└── image/                             ← Your existing image folder (keep as-is)
-    ├── Grilled Salmon.jpg
-    ├── Chicken Curry.jpg
-    └── ...
-
-HOW IT WORKS — COMMUNITY RECIPES:
 ----------------------------------
 1. A visitor goes to upload.html and fills in their recipe
 2. On submit → recipe saved to browser localStorage instantly
