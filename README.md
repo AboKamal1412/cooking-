@@ -7,12 +7,8 @@ AL-TABIKH — Redesigned Website
 4. recipe.html reads the ID from the URL, loads the recipe data,
    and renders a FULL recipe page dynamically — timer, reviews, everything
 5. Back on home.html, the community recipe appears in the grid
-   under a "🌟 Community Recipes" label
+   under a " Community Recipes" label
 
-TO OPEN:
---------
-Place the project/ folder anywhere on your computer.
-Open HTML/home.html in your browser. No server needed!
 
 FEATURES:
 ---------
